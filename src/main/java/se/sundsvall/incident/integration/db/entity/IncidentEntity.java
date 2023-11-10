@@ -14,7 +14,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
@@ -78,10 +77,8 @@ public class IncidentEntity {
 
 	@Builder.Default
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(
-		name = "incident_attachments",
-		joinColumns = @JoinColumn(name = "incident_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_incident_attachment")),
-		inverseJoinColumns = @JoinColumn(name = "attachment_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_attachment_incident")))
+	@JoinColumn(name = "incident_id", referencedColumnName = "id",
+		foreignKey = @ForeignKey(name = "fk_incident_attachment_incident_id"))
 	private List<AttachmentEntity> attachments = new ArrayList<>();
 
 	@Column(name = "updated")

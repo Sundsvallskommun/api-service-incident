@@ -32,12 +32,13 @@ class LifeBuoyIntegrationTest {
 	@Test
 	void sendLifeBuoyTest() throws JsonProcessingException {
 		var incident = createIncidentEntity();
-		when(mockMapper.toLifeBuoyRequest(any())).thenReturn(LifeBuoyRequestWrapper.builder().build());
-		when(mockClient.sendLifebuoy(any())).thenReturn(new ResponseEntity<String>(HttpStatus.OK));
+		var wrapper = LifeBuoyRequestWrapper.builder().build();
+		when(mockMapper.toLifeBuoyRequest(any())).thenReturn(wrapper);
+		when(mockClient.sendLifebuoy(wrapper)).thenReturn(new ResponseEntity<>(HttpStatus.OK));
 
 		lifeBuoyIntegration.sendLifeBuoy(incident);
 
 		verify(mockMapper).toLifeBuoyRequest(incident);
-		verify(mockClient).sendLifebuoy(any());
+		verify(mockClient).sendLifebuoy(wrapper);
 	}
 }

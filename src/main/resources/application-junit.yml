@@ -1,6 +1,6 @@
 config:
   datasource:
-    url: jdbc:tc:mariadb:10.6.4:///
+    url: jdbc:tc:mariadb:10.6.14:///
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
     username: override
     password: override
