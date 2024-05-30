@@ -34,7 +34,7 @@
         id varchar(255) not null,
         person_id varchar(255),
         phone_number varchar(255),
-        status enum ('INSKICKAT','KLART','KOMPLETTERAD','SPARAT','UNDER_BEHANDLING','VANTAR_KOMPLETTERING','ARKIVERAD','ERROR'),
+        status enum ('ARKIVERAD','ERROR','INSKICKAT','KLART','KOMPLETTERAD','SPARAT','UNDER_BEHANDLING','VANTAR_KOMPLETTERING'),
         primary key (id)
     ) engine=InnoDB;
 
