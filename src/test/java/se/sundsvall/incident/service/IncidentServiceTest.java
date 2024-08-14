@@ -4,13 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.zalando.problem.Status.BAD_REQUEST;
+import static se.sundsvall.incident.TestDataFactory.INCIDENT_ID;
+import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
 import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
 import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 import static se.sundsvall.incident.TestDataFactory.createIncidentSaveRequest;
@@ -62,60 +64,60 @@ class IncidentServiceTest {
 	private IncidentService incidentService;
 
 	@Test
-	void fetchIncidentByIdTest() {
-		when(mockIncidentRepository.findById(anyString())).thenReturn(Optional.ofNullable(createIncidentEntity()));
+	void fetchIncidentByMunicipalityIdAndIncidentIdTest() {
+		when(mockIncidentRepository.findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID)).thenReturn(Optional.ofNullable(createIncidentEntity()));
 
-		var result = incidentService.fetchIncidentById(anyString());
+		var result = incidentService.fetchIncidentByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID);
 
 		assertThat(result).isNotNull().isInstanceOf(IncidentResponse.class);
-		verify(mockIncidentRepository).findById(anyString());
+		verify(mockIncidentRepository).findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID);
 		verifyNoMoreInteractions(mockIncidentRepository);
 	}
 
 	@Test
-	void fetchIncidentById_NotFoundTest() {
-		when(mockIncidentRepository.findById(anyString())).thenReturn(Optional.empty());
+	void fetchIncidentByMunicipalityIdAndIncidentId_NotFoundTest() {
+		when(mockIncidentRepository.findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID)).thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> incidentService.fetchIncidentById(anyString()))
-			.hasMessageContaining("Not Found: Incident with id:  not found")
+		assertThatThrownBy(() -> incidentService.fetchIncidentByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID))
+			.hasMessageContaining("Not Found: Incident with id: " + INCIDENT_ID + " not found")
 			.isInstanceOf(Problem.class);
 
-		verify(mockIncidentRepository).findById(anyString());
+		verify(mockIncidentRepository).findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID);
 	}
 
 	@Test
 	void fetchOepIncidentStatusTest() {
-		when(mockIncidentRepository.findIncidentEntityByExternalCaseId(anyString()))
+		when(mockIncidentRepository.findIncidentEntityByMunicipalityIdAndExternalCaseId(MUNICIPALITY_ID, INCIDENT_ID))
 			.thenReturn(Optional.ofNullable(createIncidentEntity()));
 
-		var result = incidentService.fetchOepIncidentStatus(anyString());
+		var result = incidentService.fetchOepIncidentStatus(MUNICIPALITY_ID, INCIDENT_ID);
 
 		assertThat(result).isNotNull().isInstanceOf(IncidentOepResponse.class);
-		verify(mockIncidentRepository).findIncidentEntityByExternalCaseId(any());
+		verify(mockIncidentRepository).findIncidentEntityByMunicipalityIdAndExternalCaseId(MUNICIPALITY_ID, INCIDENT_ID);
 		verifyNoMoreInteractions(mockIncidentRepository);
 	}
 
 	@Test
 	void fetchOepIncidentStatus_NotFoundTest() {
-		when(mockIncidentRepository.findIncidentEntityByExternalCaseId(anyString())).thenReturn(Optional.empty());
+		when(mockIncidentRepository.findIncidentEntityByMunicipalityIdAndExternalCaseId(MUNICIPALITY_ID, INCIDENT_ID)).thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> incidentService.fetchOepIncidentStatus(anyString()))
-			.hasMessageContaining("Not Found: Incident with id:  not found")
+		assertThatThrownBy(() -> incidentService.fetchOepIncidentStatus(MUNICIPALITY_ID, INCIDENT_ID))
+			.hasMessageContaining("Not Found: Incident with id: " + INCIDENT_ID + " not found")
 			.isInstanceOf(Problem.class);
 
-		verify(mockIncidentRepository).findIncidentEntityByExternalCaseId(anyString());
+		verify(mockIncidentRepository).findIncidentEntityByMunicipalityIdAndExternalCaseId(MUNICIPALITY_ID, INCIDENT_ID);
 	}
 
 	@Test
 	void fetchPaginatedIncidentsTest() {
 		var incidents = List.of(createIncidentEntity(), createIncidentEntity());
 		Page<IncidentEntity> page = new PageImpl<>(incidents);
-		when(mockIncidentRepository.findAll(PageRequest.of(1, 2))).thenReturn(page);
+		when(mockIncidentRepository.findAllByMunicipalityId(MUNICIPALITY_ID, PageRequest.of(1, 2))).thenReturn(page);
 
-		var result = incidentService.fetchPaginatedIncidents(Optional.of(1), Optional.of(2));
+		var result = incidentService.fetchPaginatedIncidents(MUNICIPALITY_ID, Optional.of(1), Optional.of(2));
 
 		assertThat(result).hasSize(2);
-		verify(mockIncidentRepository).findAll(any(PageRequest.class));
+		verify(mockIncidentRepository).findAllByMunicipalityId(eq(MUNICIPALITY_ID), any(PageRequest.class));
 		verifyNoMoreInteractions(mockIncidentRepository);
 	}
 
@@ -124,7 +126,7 @@ class IncidentServiceTest {
 		var request = createIncidentSaveRequest();
 		when(mockCategoryRepository.findById(any())).thenReturn(Optional.ofNullable(createCategoryEntity()));
 
-		var result = incidentService.createIncident(request);
+		var result = incidentService.createIncident(MUNICIPALITY_ID, request);
 
 		assertThat(result).isNotNull().isInstanceOf(IncidentSaveResponse.class);
 		verify(mockCategoryRepository).findById(any());
@@ -137,7 +139,7 @@ class IncidentServiceTest {
 		var request = createIncidentSaveRequest();
 		when(mockCategoryRepository.findById(anyInt())).thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> incidentService.createIncident(request))
+		assertThatThrownBy(() -> incidentService.createIncident(MUNICIPALITY_ID, request))
 			.isInstanceOf(Problem.class)
 			.hasMessageContaining("Bad Request: Category with id: ")
 			.extracting("status").isEqualTo(BAD_REQUEST);
@@ -149,12 +151,12 @@ class IncidentServiceTest {
 	@Test
 	void updateIncidentStatusTest() {
 		var entity = createIncidentEntity();
-		when(mockIncidentRepository.findById(any())).thenReturn(Optional.ofNullable(entity));
+		when(mockIncidentRepository.findByMunicipalityIdAndIncidentId(eq(MUNICIPALITY_ID), any())).thenReturn(Optional.ofNullable(entity));
 
-		incidentService.updateIncidentStatus(entity.getIncidentId(), 7);
+		incidentService.updateIncidentStatus(MUNICIPALITY_ID, entity.getIncidentId(), 7);
 
 		assertThat(entity.getStatus()).isEqualTo(Status.ARKIVERAD);
-		verify(mockIncidentRepository).findById(entity.getIncidentId());
+		verify(mockIncidentRepository).findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, entity.getIncidentId());
 		verify(mockIncidentRepository).save(entity);
 		verifyNoMoreInteractions(mockIncidentRepository);
 	}
@@ -162,26 +164,26 @@ class IncidentServiceTest {
 	@Test
 	void updateIncidentStatusNotFoundTest() {
 		var entity = createIncidentEntity();
-		when(mockIncidentRepository.findById(any())).thenReturn(Optional.empty());
+		when(mockIncidentRepository.findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, entity.getIncidentId())).thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> incidentService.updateIncidentStatus(entity.getIncidentId(), anyInt()))
+		assertThatThrownBy(() -> incidentService.updateIncidentStatus(MUNICIPALITY_ID, entity.getIncidentId(), 1))
 			.isInstanceOf(Problem.class)
 			.hasMessageContaining("Not Found: Incident with id: ");
 
 		assertThat(entity.getStatus()).isEqualTo(Status.INSKICKAT);
-		verify(mockIncidentRepository).findById(entity.getIncidentId());
+		verify(mockIncidentRepository).findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, entity.getIncidentId());
 		verify(mockIncidentRepository, never()).save(entity);
 	}
 
 	@Test
 	void updateIncidentFeedbackTest() {
 		var entity = createIncidentEntity();
-		when(mockIncidentRepository.findById(any())).thenReturn(Optional.ofNullable(entity));
+		when(mockIncidentRepository.findByMunicipalityIdAndIncidentId(eq(MUNICIPALITY_ID), any())).thenReturn(Optional.ofNullable(entity));
 
-		incidentService.updateIncidentFeedback(entity.getIncidentId(), "Feedback!!");
+		incidentService.updateIncidentFeedback(MUNICIPALITY_ID, entity.getIncidentId(), "Feedback!!");
 
 		assertThat(entity.getFeedback()).isEqualTo("Feedback!!");
-		verify(mockIncidentRepository).findById(entity.getIncidentId());
+		verify(mockIncidentRepository).findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, entity.getIncidentId());
 		verify(mockIncidentRepository).save(entity);
 		verifyNoMoreInteractions(mockIncidentRepository);
 	}
@@ -189,13 +191,13 @@ class IncidentServiceTest {
 	@Test
 	void updateIncidentFeedbackNotFoundTest() {
 		var entity = createIncidentEntity();
-		when(mockIncidentRepository.findById(any())).thenReturn(Optional.empty());
+		when(mockIncidentRepository.findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, entity.getIncidentId())).thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> incidentService.updateIncidentFeedback(entity.getIncidentId(), anyString()))
+		assertThatThrownBy(() -> incidentService.updateIncidentFeedback(MUNICIPALITY_ID, entity.getIncidentId(), "feedback"))
 			.isInstanceOf(Problem.class)
 			.hasMessageContaining("Not Found: Incident with id: ");
 
-		verify(mockIncidentRepository).findById(entity.getIncidentId());
+		verify(mockIncidentRepository).findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, entity.getIncidentId());
 		verify(mockIncidentRepository, never()).save(entity);
 	}
 

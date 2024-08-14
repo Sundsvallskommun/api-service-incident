@@ -19,7 +19,7 @@ import se.sundsvall.incident.Application;
 })
 class LifeBuoyIT extends AbstractAppTest {
 
-	private static final String PATH = "/incident";
+	private static final String PATH = "/2281/incident";
 	private static final String REQUEST_FILE = "request.json";
 	private static final String EXPECTED_FILE = "expected.json";
 

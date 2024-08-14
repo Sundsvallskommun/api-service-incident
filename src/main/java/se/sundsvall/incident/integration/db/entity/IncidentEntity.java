@@ -13,6 +13,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -30,7 +31,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "incident")
+@Table(name = "incident",
+	indexes = {
+		@Index(name = "idx_incident_municipality_id", columnList = "municipality_id")
+	})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder(setterPrefix = "with")
@@ -42,6 +46,9 @@ public class IncidentEntity {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "id")
 	private String incidentId;
+
+	@Column(name = "municipality_id")
+	private String municipalityId;
 
 	@Column(name = "external_case_id")
 	private String externalCaseId;

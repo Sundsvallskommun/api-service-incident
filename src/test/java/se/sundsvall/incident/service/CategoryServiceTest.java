@@ -3,11 +3,11 @@ package se.sundsvall.incident.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
 import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
 import static se.sundsvall.incident.TestDataFactory.createCategoryPatch;
 import static se.sundsvall.incident.TestDataFactory.createCategoryPost;
@@ -37,52 +37,52 @@ class CategoryServiceTest {
 	private CategoryService categoryService;
 
 	@Test
-	void fetchCategoryByIdTest() {
-		when(mockCategoryRepository.findById(any(Integer.class)))
+	void fetchCategoryByMunicipalityAndIdTest() {
+		when(mockCategoryRepository.findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5))
 			.thenReturn(Optional.of(createCategoryEntity()));
 
-		var result = categoryService.fetchCategoryById(5);
+		var result = categoryService.fetchCategoryByMunicipalityAndId(MUNICIPALITY_ID, 5);
 
 		assertThat(result).isInstanceOf(Category.class).isNotNull();
 
-		verify(mockCategoryRepository).findById(5);
+		verify(mockCategoryRepository).findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5);
 		verifyNoMoreInteractions(mockCategoryRepository);
 	}
 
 	@Test
-	void fetchCategoryByIdNotFoundTest() {
-		when(mockCategoryRepository.findById(any(Integer.class)))
+	void fetchCategoryByMunicipalityAndIdNotFoundTest() {
+		when(mockCategoryRepository.findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5))
 			.thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> categoryService.fetchCategoryById(any(Integer.class)))
+		assertThatThrownBy(() -> categoryService.fetchCategoryByMunicipalityAndId(MUNICIPALITY_ID, 5))
 			.isInstanceOf(Problem.class)
 			.hasMessageContaining("Not Found: Category");
 
-		verify(mockCategoryRepository).findById(anyInt());
+		verify(mockCategoryRepository).findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5);
 		verifyNoMoreInteractions(mockCategoryRepository);
 	}
 
 	@Test
 	void fetchAllCategoryWhenFound() {
-		when(mockCategoryRepository.findAll()).thenReturn(List.of(createCategoryEntity(), createCategoryEntity()));
+		when(mockCategoryRepository.findAllByMunicipalityId(MUNICIPALITY_ID)).thenReturn(List.of(createCategoryEntity(), createCategoryEntity()));
 
-		final var categories = categoryService.fetchAllCategories();
+		final var categories = categoryService.fetchCategories(MUNICIPALITY_ID);
 
 		assertThat(categories).isNotNull().isNotEmpty().hasSize(2);
 
-		verify(mockCategoryRepository).findAll();
+		verify(mockCategoryRepository).findAllByMunicipalityId(MUNICIPALITY_ID);
 		verifyNoMoreInteractions(mockCategoryRepository);
 	}
 
 	@Test
-	void fetchAllCategoriesWhenEmpty() {
-		when(mockCategoryRepository.findAll()).thenReturn(List.of());
+	void fetchCategoriesWhenEmpty() {
+		when(mockCategoryRepository.findAllByMunicipalityId(MUNICIPALITY_ID)).thenReturn(List.of());
 
-		final var categories = categoryService.fetchAllCategories();
+		final var categories = categoryService.fetchCategories(MUNICIPALITY_ID);
 
 		assertThat(categories).isNotNull().isEmpty();
 
-		verify(mockCategoryRepository).findAll();
+		verify(mockCategoryRepository).findAllByMunicipalityId(MUNICIPALITY_ID);
 		verifyNoMoreInteractions(mockCategoryRepository);
 	}
 
@@ -91,7 +91,7 @@ class CategoryServiceTest {
 		final var entity = createCategoryEntity();
 		when(mockCategoryRepository.save(any())).thenReturn(entity);
 
-		final var category = categoryService.createCategory(createCategoryPost());
+		final var category = categoryService.createCategory(MUNICIPALITY_ID, createCategoryPost());
 
 		assertThat(category.getCategoryId()).isEqualTo(entity.getCategoryId());
 		assertThat(category.getForwardTo()).isEqualTo(entity.getForwardTo());
@@ -103,71 +103,71 @@ class CategoryServiceTest {
 
 	@Test
 	void deleteCategoryByIdTest() {
-		when(mockCategoryRepository.existsById(5)).thenReturn(true);
+		when(mockCategoryRepository.existsByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5)).thenReturn(true);
 
-		categoryService.deleteCategoryById(5);
-		verify(mockCategoryRepository).existsById(5);
-		verify(mockCategoryRepository).deleteById(5);
+		categoryService.deleteCategoryById(MUNICIPALITY_ID, 5);
+		verify(mockCategoryRepository).existsByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5);
+		verify(mockCategoryRepository).deleteByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5);
 	}
 
 	@Test
 	void deleteCategoryByIdNotFoundTest() {
-		when(mockCategoryRepository.existsById(anyInt())).thenReturn(false);
+		when(mockCategoryRepository.existsByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5)).thenReturn(false);
 
-		assertThatThrownBy(() -> categoryService.deleteCategoryById(anyInt()))
+		assertThatThrownBy(() -> categoryService.deleteCategoryById(MUNICIPALITY_ID, 5))
 			.isInstanceOf(Problem.class)
 			.hasMessageContaining("Not Found: Category");
 
-		verify(mockCategoryRepository, never()).deleteById(any());
+		verify(mockCategoryRepository, never()).deleteByMunicipalityIdAndCategoryId(any(), any());
 	}
 
 	@Test
 	void patchEntityTest() {
 		var entity = createCategoryEntity();
-		when(mockCategoryRepository.findById(anyInt())).thenReturn(Optional.ofNullable(entity));
+		when(mockCategoryRepository.findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5)).thenReturn(Optional.ofNullable(entity));
 		when(mockCategoryRepository.save(any())).thenReturn(entity);
 
-		var result = categoryService.patchCategory(5, createCategoryPatch());
+		var result = categoryService.patchCategory(MUNICIPALITY_ID, 5, createCategoryPatch());
 
 		assertThat(result).isInstanceOf(Category.class);
-		verify(mockCategoryRepository).findById(5);
+		verify(mockCategoryRepository).findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5);
 		verify(mockCategoryRepository).save(any());
 	}
 
 	@Test
 	void patchEntityNotFoundTest() {
 		var patch = createCategoryPatch();
-		when(mockCategoryRepository.findById(anyInt())).thenReturn(Optional.empty());
+		when(mockCategoryRepository.findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5)).thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> categoryService.patchCategory(anyInt(), patch))
+		assertThatThrownBy(() -> categoryService.patchCategory(MUNICIPALITY_ID, 5, patch))
 			.isInstanceOf(Problem.class)
 			.hasMessageContaining("Not Found: Category");
 
-		verify(mockCategoryRepository).findById(anyInt());
+		verify(mockCategoryRepository).findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, 5);
 		verify(mockCategoryRepository, never()).save(any());
 	}
 
 	@Test
 	void fetchValidCategoriesTest() {
-		when(mockCategoryRepository.findAll()).thenReturn(List.of(createCategoryEntity(), createCategoryEntity()));
+		when(mockCategoryRepository.findAllByMunicipalityId(MUNICIPALITY_ID)).thenReturn(List.of(createCategoryEntity(), createCategoryEntity()));
 
-		var result = categoryService.fetchValidCategories();
+		var result = categoryService.fetchValidCategories(MUNICIPALITY_ID);
 
 		assertThat(result).hasSize(2);
-		assertThat(result.get(0)).isInstanceOf(ValidCategoryResponse.class);
-		verify(mockCategoryRepository).findAll();
+		assertThat(result.getFirst()).isInstanceOf(ValidCategoryResponse.class);
+		verify(mockCategoryRepository).findAllByMunicipalityId(MUNICIPALITY_ID);
 		verifyNoMoreInteractions(mockCategoryRepository);
 	}
 
 	@Test
 	void fetchValidOepCategoriesTest() {
-		when(mockCategoryRepository.findAll()).thenReturn(List.of(createCategoryEntity(), createCategoryEntity()));
+		when(mockCategoryRepository.findAllByMunicipalityId(MUNICIPALITY_ID)).thenReturn(List.of(createCategoryEntity(), createCategoryEntity()));
 
-		var result = categoryService.fetchValidOepCategories();
+		var result = categoryService.fetchValidOepCategories(MUNICIPALITY_ID);
 
 		assertThat(result).hasSize(2);
-		assertThat(result.get(0)).isInstanceOf(ValidOepCategoryResponse.class);
-		verify(mockCategoryRepository).findAll();
+		assertThat(result.getFirst()).isInstanceOf(ValidOepCategoryResponse.class);
+		verify(mockCategoryRepository).findAllByMunicipalityId(MUNICIPALITY_ID);
 		verifyNoMoreInteractions(mockCategoryRepository);
 	}
 

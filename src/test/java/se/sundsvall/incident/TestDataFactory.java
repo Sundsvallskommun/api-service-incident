@@ -29,6 +29,7 @@ import generated.se.sundsvall.messaging.EmailSender;
 
 public final class TestDataFactory {
 
+	public static final String MUNICIPALITY_ID = "2281";
 	public static final String INCIDENT_ID = "ef60e3e-d245-4d79-b350-fbabc022b249";
 	public static final String PERSON_ID = "58f96da8-6d76-4fa6-bb92-64f71fdc6aa5";
 
