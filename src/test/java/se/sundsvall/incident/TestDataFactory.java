@@ -117,7 +117,6 @@ public final class TestDataFactory {
 			.withCategory(3)
 			.withDescription("Ärendebeskrivning")
 			.withMapCoordinates("62.23162,17.27403")
-			.withExternalCaseId("123")
 			.withAttachments(
 				List.of(createAttachmentRequest()))
 			.build();
