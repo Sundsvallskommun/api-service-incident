@@ -29,39 +29,39 @@ public class CategoryService {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public Category fetchCategoryById(final Integer id) {
-		var category = categoryRepository.findById(id)
-			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, CATEGORY_NOT_FOUND.formatted(id)));
+	public Category fetchCategoryByMunicipalityAndId(final String municipalityId, final Integer categoryId) {
+		var category = categoryRepository.findByMunicipalityIdAndCategoryId(municipalityId, categoryId)
+			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, CATEGORY_NOT_FOUND.formatted(categoryId)));
 		return toCategory(category);
 	}
 
-	public List<Category> fetchAllCategories() {
-		return categoryRepository.findAll().stream()
+	public List<Category> fetchCategories(final String municipalityId) {
+		return categoryRepository.findAllByMunicipalityId(municipalityId).stream()
 			.map(Mapper::toCategory)
 			.toList();
 	}
 
-	public Category createCategory(final CategoryPost categoryPost) {
-		var category = categoryRepository.save(toCategoryEntity(categoryPost));
+	public Category createCategory(final String municipalityId, final CategoryPost categoryPost) {
+		var category = categoryRepository.save(toCategoryEntity(municipalityId, categoryPost));
 		return toCategory(category);
 	}
 
-	public void deleteCategoryById(final Integer id) {
-		if (!categoryRepository.existsById(id)) {
-			throw Problem.valueOf(NOT_FOUND, CATEGORY_NOT_FOUND.formatted(id));
+	public void deleteCategoryById(final String municipalityId, final Integer categoryId) {
+		if (!categoryRepository.existsByMunicipalityIdAndCategoryId(municipalityId, categoryId)) {
+			throw Problem.valueOf(NOT_FOUND, CATEGORY_NOT_FOUND.formatted(categoryId));
 		}
-		categoryRepository.deleteById(id);
+		categoryRepository.deleteByMunicipalityIdAndCategoryId(municipalityId, categoryId);
 	}
 
-	public Category patchCategory(final Integer id, final CategoryPatch patch) {
-		var categoryEntity = categoryRepository.findById(id)
+	public Category patchCategory(final String municipalityId, final Integer id, final CategoryPatch patch) {
+		var categoryEntity = categoryRepository.findByMunicipalityIdAndCategoryId(municipalityId, id)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, CATEGORY_NOT_FOUND.formatted(id)));
 		var category = categoryRepository.save(patchCategory(categoryEntity, patch));
 		return toCategory(category);
 	}
 
-	public List<ValidCategoryResponse> fetchValidCategories() {
-		return categoryRepository.findAll().stream()
+	public List<ValidCategoryResponse> fetchValidCategories(final String municipalityId) {
+		return categoryRepository.findAllByMunicipalityId(municipalityId).stream()
 			.map(category -> ValidCategoryResponse.builder()
 				.withCategory(category.getLabel())
 				.withCategoryId(category.getCategoryId())
@@ -69,8 +69,8 @@ public class CategoryService {
 			.toList();
 	}
 
-	public List<ValidOepCategoryResponse> fetchValidOepCategories() {
-		return categoryRepository.findAll().stream()
+	public List<ValidOepCategoryResponse> fetchValidOepCategories(final String municipalityId) {
+		return categoryRepository.findAllByMunicipalityId(municipalityId).stream()
 			.map(category -> ValidOepCategoryResponse.builder()
 				.withKey(String.valueOf(category.getCategoryId()))
 				.withValue(category.getLabel())

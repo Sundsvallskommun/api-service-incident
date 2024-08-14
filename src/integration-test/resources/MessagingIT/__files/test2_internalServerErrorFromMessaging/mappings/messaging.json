@@ -1,13 +1,13 @@
 {
-  "request": {
-    "method": "POST",
-    "url": "/messaging/email"
-  },
-  "response": {
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "bodyFileName": "test2_internalServerErrorFromMessaging/responses/messaging.json",
-    "status": 500
-  }
+	"request": {
+		"method": "POST",
+		"url": "/messaging/2281/email"
+	},
+	"response": {
+		"headers": {
+			"Content-Type": "application/json"
+		},
+		"bodyFileName": "test2_internalServerErrorFromMessaging/responses/messaging.json",
+		"status": 500
+	}
 }

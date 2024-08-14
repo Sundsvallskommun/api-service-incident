@@ -22,11 +22,12 @@ public final class Mapper {
 	}
 
 	public static IncidentEntity toIncidentEntity(final IncidentSaveRequest request,
-		final CategoryEntity category, final List<AttachmentEntity> attachments) {
+		final CategoryEntity category, final List<AttachmentEntity> attachments, final String municipalityId) {
 		if (request == null) {
 			return null;
 		}
 		return IncidentEntity.builder()
+			.withMunicipalityId(municipalityId)
 			.withPersonId(request.getPersonId())
 			.withExternalCaseId(request.getExternalCaseId())
 			.withDescription(request.getDescription())
@@ -88,11 +89,12 @@ public final class Mapper {
 			.build();
 	}
 
-	public static CategoryEntity toCategoryEntity(final CategoryPost categoryPost) {
+	public static CategoryEntity toCategoryEntity(final String municipalityId, final CategoryPost categoryPost) {
 		if (categoryPost == null) {
 			return null;
 		}
 		return CategoryEntity.builder()
+			.withMunicipalityId(municipalityId)
 			.withLabel(categoryPost.label())
 			.withTitle(categoryPost.title())
 			.withForwardTo(categoryPost.forwardTo())

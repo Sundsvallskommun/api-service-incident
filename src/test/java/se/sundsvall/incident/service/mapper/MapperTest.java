@@ -1,6 +1,7 @@
 package se.sundsvall.incident.service.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
 import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
 import static se.sundsvall.incident.TestDataFactory.createCategoryPost;
 import static se.sundsvall.incident.service.mapper.Mapper.toAttachment;
@@ -38,7 +39,7 @@ class MapperTest {
 	void toCategoryEntityTest() {
 		var postRequest = createCategoryPost();
 
-		var entity = toCategoryEntity(postRequest);
+		var entity = toCategoryEntity(MUNICIPALITY_ID, postRequest);
 
 		assertThat(entity.getTitle()).isEqualTo(postRequest.title());
 		assertThat(entity.getLabel()).isEqualTo(postRequest.label());
@@ -47,13 +48,13 @@ class MapperTest {
 
 	@Test
 	void toCategoryEntityWhenNullTest() {
-		var entity = toCategoryEntity(null);
+		var entity = toCategoryEntity(MUNICIPALITY_ID, null);
 		assertThat(entity).isNull();
 	}
-
+	
 	@Test
 	void toIncidentEntityWhenNullTest() {
-		var entity = toIncidentEntity(null, null, null);
+		var entity = toIncidentEntity(null, null, null, null);
 		assertThat(entity).isNull();
 	}
 

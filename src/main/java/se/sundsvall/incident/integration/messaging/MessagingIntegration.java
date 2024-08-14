@@ -20,10 +20,10 @@ public class MessagingIntegration {
 	}
 
 	public Optional<MessageResult> sendEmail(final IncidentEntity incident) {
-		return Optional.of(client.sendEmail(messagingMapper.toEmailDto(incident)));
+		return Optional.of(client.sendEmail(incident.getMunicipalityId(), messagingMapper.toEmailDto(incident)));
 	}
 
 	public Optional<MessageResult> sendMSVAEmail(final IncidentEntity incident) {
-		return Optional.of(client.sendEmail(messagingMapper.toMSVAEmailRequest(incident)));
+		return Optional.of(client.sendEmail(incident.getMunicipalityId(), messagingMapper.toMSVAEmailRequest(incident)));
 	}
 }

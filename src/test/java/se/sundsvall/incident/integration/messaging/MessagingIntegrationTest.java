@@ -1,8 +1,10 @@
 package se.sundsvall.incident.integration.messaging;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
 import static se.sundsvall.incident.TestDataFactory.createEmailRequest;
 import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 import static se.sundsvall.incident.TestDataFactory.createMSVAEmailRequest;
@@ -31,22 +33,24 @@ class MessagingIntegrationTest {
 	@Test
 	void sendEmail() {
 		var incident = createIncidentEntity();
+		incident.setMunicipalityId(MUNICIPALITY_ID);
 		when(mockMessagingMapper.toEmailDto(any())).thenReturn(createEmailRequest());
-		when(mockMessagingClient.sendEmail(any())).thenReturn(new MessageResult());
+		when(mockMessagingClient.sendEmail(eq(MUNICIPALITY_ID), any())).thenReturn(new MessageResult());
 		messagingIntegration.sendEmail(incident);
 
-		verify(mockMessagingClient).sendEmail(any(EmailRequest.class));
+		verify(mockMessagingClient).sendEmail(eq(MUNICIPALITY_ID), any(EmailRequest.class));
 		verify(mockMessagingMapper).toEmailDto(any());
 	}
 
 	@Test
 	void sendMSVAEmail() {
 		var incident = createIncidentEntity();
+		incident.setMunicipalityId(MUNICIPALITY_ID);
 		when(mockMessagingMapper.toMSVAEmailRequest(any())).thenReturn(createMSVAEmailRequest());
-		when(mockMessagingClient.sendEmail(any())).thenReturn(new MessageResult());
+		when(mockMessagingClient.sendEmail(eq(MUNICIPALITY_ID), any())).thenReturn(new MessageResult());
 		messagingIntegration.sendMSVAEmail(incident);
 
-		verify(mockMessagingClient).sendEmail(any(EmailRequest.class));
+		verify(mockMessagingClient).sendEmail(eq(MUNICIPALITY_ID), any(EmailRequest.class));
 		verify(mockMessagingMapper).toMSVAEmailRequest(any());
 	}
 }

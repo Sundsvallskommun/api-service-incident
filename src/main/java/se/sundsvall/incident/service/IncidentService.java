@@ -1,4 +1,5 @@
 package se.sundsvall.incident.service;
+
 import static org.zalando.problem.Status.BAD_REQUEST;
 import static org.zalando.problem.Status.NOT_FOUND;
 import static se.sundsvall.incident.service.mapper.Mapper.toIncidentEntity;
@@ -56,21 +57,22 @@ public class IncidentService {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public IncidentResponse fetchIncidentById(final String id) {
-		var incident = incidentRepository.findById(id)
-			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, id)));
+	public IncidentResponse fetchIncidentByMunicipalityIdAndIncidentId(final String municipalityId, final String incidentId) {
+		var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
+			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, incidentId)));
 		return toIncidentResponse(incident);
 	}
 
-	public IncidentOepResponse fetchOepIncidentStatus(final String externalCaseId) {
-		var incident = incidentRepository.findIncidentEntityByExternalCaseId(externalCaseId)
+	public IncidentOepResponse fetchOepIncidentStatus(final String municipalityId, final String externalCaseId) {
+		var incident = incidentRepository.findIncidentEntityByMunicipalityIdAndExternalCaseId(municipalityId, externalCaseId)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, externalCaseId)));
 		return toIncidentOepResponse(incident);
 	}
 
-	public List<IncidentResponse> fetchPaginatedIncidents(final Optional<Integer> pageNumber,
+	public List<IncidentResponse> fetchPaginatedIncidents(final String municipalityId,
+		final Optional<Integer> pageNumber,
 		final Optional<Integer> pageSize) {
-		var incidents = incidentRepository.findAll(
+		var incidents = incidentRepository.findAllByMunicipalityId(municipalityId,
 			PageRequest.of(pageNumber.orElse(0), pageSize.orElse(100)));
 
 		return incidents.stream()
@@ -79,7 +81,7 @@ public class IncidentService {
 	}
 
 	@Transactional
-	public IncidentSaveResponse createIncident(final IncidentSaveRequest request) {
+	public IncidentSaveResponse createIncident(final String municipalityId, final IncidentSaveRequest request) {
 		var category = categoryRepository.findById(request.getCategory())
 			.orElseThrow(() -> Problem.valueOf(BAD_REQUEST, ENTITY_NOT_FOUND.formatted(CATEGORY, request.getCategory())));
 		var attachments = Optional.ofNullable(request.getAttachments())
@@ -88,7 +90,7 @@ public class IncidentService {
 				.toList())
 			.orElseGet(ArrayList::new);
 
-		var incident = toIncidentEntity(request, category, attachments);
+		var incident = toIncidentEntity(request, category, attachments, municipalityId);
 
 		sendNotification(incident);
 
@@ -99,16 +101,16 @@ public class IncidentService {
 	}
 
 	@Transactional
-	public void updateIncidentStatus(final String incidentId, final Integer statusId) {
-		var incident = incidentRepository.findById(incidentId)
+	public void updateIncidentStatus(final String municipalityId, final String incidentId, final Integer statusId) {
+		var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, incidentId)));
 		incident.setStatus(Status.forValue(statusId));
 		incidentRepository.save(incident);
 	}
 
 	@Transactional
-	public void updateIncidentFeedback(final String incidentId, final String feedback) {
-		var incident = incidentRepository.findById(incidentId)
+	public void updateIncidentFeedback(final String municipalityId, final String incidentId, final String feedback) {
+		var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, incidentId)));
 		incident.setFeedback(feedback);
 		incidentRepository.save(incident);

@@ -16,6 +16,7 @@
         category_id integer not null auto_increment,
         forward_to varchar(255),
         label varchar(255),
+        municipality_id varchar(255),
         subject varchar(255),
         title varchar(255),
         primary key (category_id)
@@ -32,17 +33,24 @@
         external_case_id varchar(255),
         feedback varchar(255),
         id varchar(255) not null,
+        municipality_id varchar(255),
         person_id varchar(255),
         phone_number varchar(255),
         status enum ('ARKIVERAD','ERROR','INSKICKAT','KLART','KOMPLETTERAD','SPARAT','UNDER_BEHANDLING','VANTAR_KOMPLETTERING'),
         primary key (id)
     ) engine=InnoDB;
 
-    alter table if exists category 
+    create index idx_category_municipality_id
+       on category (municipality_id);
+
+    alter table if exists category
        add constraint UK_category_title unique (title);
 
-    alter table if exists category 
+    alter table if exists category
        add constraint UK_category_label unique (label);
+
+    create index idx_incident_municipality_id
+       on incident (municipality_id);
 
     alter table if exists attachment 
        add constraint fk_incident_attachment_incident_id 
