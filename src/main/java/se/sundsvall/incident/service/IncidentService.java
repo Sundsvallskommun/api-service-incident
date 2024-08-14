@@ -82,7 +82,7 @@ public class IncidentService {
 
 	@Transactional
 	public IncidentSaveResponse createIncident(final String municipalityId, final IncidentSaveRequest request) {
-		var category = categoryRepository.findById(request.getCategory())
+		var category = categoryRepository.findByMunicipalityIdAndCategoryId(municipalityId, request.getCategory())
 			.orElseThrow(() -> Problem.valueOf(BAD_REQUEST, ENTITY_NOT_FOUND.formatted(CATEGORY, request.getCategory())));
 		var attachments = Optional.ofNullable(request.getAttachments())
 			.map(list -> list.stream()

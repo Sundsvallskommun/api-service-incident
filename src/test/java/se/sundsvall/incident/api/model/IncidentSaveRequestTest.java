@@ -21,7 +21,7 @@ class IncidentSaveRequestTest {
 		assertThat(request.getCategory()).isEqualTo(3);
 		assertThat(request.getDescription()).isEqualTo("Ärendebeskrivning");
 		assertThat(request.getMapCoordinates()).isEqualTo("62.23162,17.27403");
-		assertThat(request.getExternalCaseId()).isEqualTo("123");
+		assertThat(request.getExternalCaseId()).isEqualTo("12345");
 		assertThat(request.getAttachments()).hasSize(1);
 	}
 

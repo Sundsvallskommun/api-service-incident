@@ -3,7 +3,6 @@ package se.sundsvall.incident.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
@@ -124,12 +123,12 @@ class IncidentServiceTest {
 	@Test
 	void createIncidentTest() {
 		var request = createIncidentSaveRequest();
-		when(mockCategoryRepository.findById(any())).thenReturn(Optional.ofNullable(createCategoryEntity()));
+		when(mockCategoryRepository.findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, request.getCategory())).thenReturn(Optional.ofNullable(createCategoryEntity()));
 
 		var result = incidentService.createIncident(MUNICIPALITY_ID, request);
 
 		assertThat(result).isNotNull().isInstanceOf(IncidentSaveResponse.class);
-		verify(mockCategoryRepository).findById(any());
+		verify(mockCategoryRepository).findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, request.getCategory());
 		verify(mockIncidentRepository).save(any());
 		verifyNoMoreInteractions(mockCategoryRepository);
 	}
@@ -137,14 +136,14 @@ class IncidentServiceTest {
 	@Test
 	void createIncidentNotFoundTest() {
 		var request = createIncidentSaveRequest();
-		when(mockCategoryRepository.findById(anyInt())).thenReturn(Optional.empty());
+		when(mockCategoryRepository.findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, request.getCategory())).thenReturn(Optional.empty());
 
 		assertThatThrownBy(() -> incidentService.createIncident(MUNICIPALITY_ID, request))
 			.isInstanceOf(Problem.class)
 			.hasMessageContaining("Bad Request: Category with id: ")
 			.extracting("status").isEqualTo(BAD_REQUEST);
 
-		verify(mockCategoryRepository).findById(request.getCategory());
+		verify(mockCategoryRepository).findByMunicipalityIdAndCategoryId(MUNICIPALITY_ID, request.getCategory());
 		verify(mockIncidentRepository, never()).save(any());
 	}
 
