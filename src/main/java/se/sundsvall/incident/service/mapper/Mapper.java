@@ -27,15 +27,15 @@ public final class Mapper {
 			return null;
 		}
 		return IncidentEntity.builder()
-			.withMunicipalityId(municipalityId)
 			.withPersonId(request.getPersonId())
 			.withExternalCaseId(request.getExternalCaseId())
 			.withDescription(request.getDescription())
-			.withStatus(Status.INSKICKAT)
 			.withEmail(request.getEmail())
 			.withCoordinates(request.getMapCoordinates())
 			.withContactMethod(request.getContactMethod())
 			.withPhoneNumber(request.getPhoneNumber())
+			.withMunicipalityId(municipalityId)
+			.withStatus(Status.INSKICKAT)
 			.withCategory(category)
 			.withAttachments(attachments)
 			.build();

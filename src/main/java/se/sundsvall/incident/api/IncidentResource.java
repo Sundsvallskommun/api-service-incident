@@ -55,10 +55,8 @@ class IncidentResource {
 		this.incidentService = incidentService;
 	}
 
-	@Operation(summary = "Get list of incidents",
-		responses = {
-			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
-		})
+	@Operation(summary = "Get list of incidents")
+	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 	@GetMapping(produces = {APPLICATION_PROBLEM_JSON_VALUE, APPLICATION_JSON_VALUE})
 	ResponseEntity<List<IncidentResponse>> fetchAllIncidents(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281")
@@ -100,10 +98,11 @@ class IncidentResource {
 	}
 
 	@Operation(summary = "Get a list of valid statuses")
-	@ApiResponse(
-		responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
-	@GetMapping(value = "/statuses", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
-	public ResponseEntity<List<ValidStatusResponse>> getValidIncidentStatuses() {
+	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	@GetMapping(value = "/incident/statuses", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
+	public ResponseEntity<List<ValidStatusResponse>> getValidIncidentStatuses(
+		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281")
+		@PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 		return ok(Arrays.stream(Status.values())
 			.map(dto -> ValidStatusResponse.builder()
 				.withStatus(dto.getLabel())
@@ -111,10 +110,8 @@ class IncidentResource {
 			.toList());
 	}
 
-	@Operation(summary = "Create a incident and send notification",
-		responses = {
-			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
-		})
+	@Operation(summary = "Create a incident and send notification")
+	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 	@PostMapping(produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE}, consumes = APPLICATION_JSON_VALUE)
 	ResponseEntity<IncidentSaveResponse> createIncident(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281")
@@ -157,6 +154,3 @@ class IncidentResource {
 	}
 
 }
-
-
-

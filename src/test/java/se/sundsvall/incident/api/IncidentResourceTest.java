@@ -113,7 +113,7 @@ class IncidentResourceTest {
 
 	@Test
 	void getValidStatuses() {
-		var response = incidentResource.getValidIncidentStatuses();
+		var response = incidentResource.getValidIncidentStatuses(MUNICIPALITY_ID);
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody()).isNotNull();
