@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-  - url: http://localhost:53111
+  - url: http://localhost:55942
     description: Generated server url
 paths:
   /{municipalityId}/incident:
@@ -500,6 +500,46 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+  /{municipalityId}/incident/incident/statuses:
+    get:
+      tags:
+        - Incident resources
+      summary: Get a list of valid statuses
+      operationId: getValidIncidentStatuses
+      parameters:
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "200":
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ValidStatusResponse"
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ValidStatusResponse"
   /{municipalityId}/category/valid:
     get:
       tags:
@@ -580,38 +620,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ValidOepCategoryResponse"
-  /incident/statuses:
-    get:
-      tags:
-        - Incident resources
-      summary: Get a list of valid statuses
-      operationId: getValidIncidentStatuses
-      responses:
-        "400":
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "200":
-          description: Successful Operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ValidStatusResponse"
-            application/problem+json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ValidStatusResponse"
   /api-docs:
     get:
       tags:
@@ -707,8 +715,6 @@ components:
     Problem:
       type: object
       properties:
-        status:
-          $ref: "#/components/schemas/StatusType"
         instance:
           type: string
           format: uri
@@ -719,6 +725,8 @@ components:
           type: object
           additionalProperties:
             type: object
+        status:
+          $ref: "#/components/schemas/StatusType"
         title:
           type: string
         detail:
@@ -909,6 +917,18 @@ components:
           type: string
           description: Status text
           example: Klart
+    ValidStatusResponse:
+      type: object
+      properties:
+        statusId:
+          type: integer
+          description: The ID of the status
+          format: int32
+          example: 5
+        status:
+          type: string
+          description: The status name
+          example: INSKICKAT
     ValidCategoryResponse:
       type: object
       properties:
@@ -932,16 +952,4 @@ components:
           type: string
           description: The category label
           example: VATTENMÄTARE
-    ValidStatusResponse:
-      type: object
-      properties:
-        statusId:
-          type: integer
-          description: The ID of the status
-          format: int32
-          example: 5
-        status:
-          type: string
-          description: The status name
-          example: INSKICKAT
   securitySchemes: { }
