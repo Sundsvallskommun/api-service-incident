@@ -46,7 +46,6 @@ public class IncidentService {
 	private final IncidentRepository incidentRepository;
 	private final CategoryRepository categoryRepository;
 
-
 	public IncidentService(final LifeBuoyIntegration lifeBuoyIntegration,
 		final MessagingIntegration messagingIntegration,
 		final IncidentRepository incidentRepository,
@@ -138,7 +137,7 @@ public class IncidentService {
 	private void setIncidentStatus(final IncidentEntity incident, final Optional<MessageResult> messageResult) {
 		messageResult.ifPresentOrElse(
 			result -> {
-				final var deliveryStatus = result.getDeliveries().get(0).getStatus();
+				final var deliveryStatus = result.getDeliveries().getFirst().getStatus();
 				if (deliveryStatus == MessageStatus.SENT || deliveryStatus == MessageStatus.PENDING) {
 					incident.setStatus(Status.INSKICKAT);
 				} else {
