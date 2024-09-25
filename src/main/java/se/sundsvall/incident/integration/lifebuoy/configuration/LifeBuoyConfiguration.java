@@ -6,12 +6,11 @@ import org.springframework.cloud.openfeign.FeignBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
+import feign.Request;
+import feign.codec.ErrorDecoder;
 import se.sundsvall.dept44.configuration.feign.FeignConfiguration;
 import se.sundsvall.dept44.configuration.feign.FeignMultiCustomizer;
 import se.sundsvall.dept44.configuration.feign.decoder.ProblemErrorDecoder;
-
-import feign.Request;
-import feign.codec.ErrorDecoder;
 
 @Import(FeignConfiguration.class)
 public class LifeBuoyConfiguration {
@@ -42,5 +41,4 @@ public class LifeBuoyConfiguration {
 	ErrorDecoder errorDecoder() {
 		return new ProblemErrorDecoder(REGISTRATION_ID);
 	}
-
 }

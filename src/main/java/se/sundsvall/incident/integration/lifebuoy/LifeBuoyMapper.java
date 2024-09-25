@@ -2,10 +2,11 @@ package se.sundsvall.incident.integration.lifebuoy;
 
 import java.util.Arrays;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 import se.sundsvall.incident.integration.lifebuoy.configuration.LifeBuoyProperties;
@@ -40,6 +41,5 @@ class LifeBuoyMapper {
 				.withValue(LifebuoyRequest.TypeAndValue.Type.GeoProperty, "location", new LifebuoyRequest.Location(Arrays.stream(incident.getCoordinates().split(",")).mapToDouble(Double::parseDouble).toArray()))
 				.build()))
 			.build();
-
 	}
 }
