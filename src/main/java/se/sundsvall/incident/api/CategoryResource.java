@@ -12,6 +12,7 @@ import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Problem;
+import org.zalando.problem.violations.ConstraintViolationProblem;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,12 +41,13 @@ import se.sundsvall.incident.api.model.ValidOepCategoryResponse;
 import se.sundsvall.incident.service.CategoryService;
 
 @RestController
+@Validated
 @RequestMapping("/{municipalityId}/category")
 @Tag(name = "Category resources")
 @ApiResponses(value = {
 	@ApiResponse(responseCode = "400",
 		description = "Bad Request",
-		content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class))),
+		content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = { Problem.class, ConstraintViolationProblem.class }))),
 	@ApiResponse(responseCode = "500",
 		description = "Internal Server Error",
 		content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))

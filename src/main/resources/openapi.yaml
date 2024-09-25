@@ -1,48 +1,50 @@
 openapi: 3.0.1
 info:
   title: api-incident
-  contact: { }
+  contact: {}
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-  - url: http://localhost:55942
-    description: Generated server url
+- url: http://localhost:59387
+  description: Generated server url
 paths:
   /{municipalityId}/incident:
     get:
       tags:
-        - Incident resources
+      - Incident resources
       summary: Get list of incidents
       operationId: fetchAllIncidents
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: pageNumber
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: pageSize
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
       responses:
         "400":
           description: Bad Request
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -64,17 +66,17 @@ paths:
                   $ref: "#/components/schemas/IncidentResponse"
     post:
       tags:
-        - Incident resources
+      - Incident resources
       summary: Create a incident and send notification
       operationId: createIncident
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       requestBody:
         content:
           application/json:
@@ -87,7 +89,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -106,17 +110,17 @@ paths:
   /{municipalityId}/category:
     get:
       tags:
-        - Category resources
+      - Category resources
       summary: Fetch all categories
       operationId: getAllCategories
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       responses:
         "200":
           description: All categories returned
@@ -136,7 +140,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -145,17 +151,17 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       tags:
-        - Category resources
+      - Category resources
       summary: Create category
       operationId: postCategory
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       requestBody:
         content:
           application/json:
@@ -170,7 +176,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -180,28 +188,28 @@ paths:
   /{municipalityId}/incident/status/{incidentId}:
     patch:
       tags:
-        - Incident resources
+      - Incident resources
       summary: Update the status for a specific incident
       operationId: patchStatus
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: incidentId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: status
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: incidentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "200":
           description: Successful Operation
@@ -216,7 +224,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -226,27 +236,27 @@ paths:
   /{municipalityId}/incident/feedback/{incidentId}:
     patch:
       tags:
-        - Incident resources
+      - Incident resources
       summary: Set incident feedback
       operationId: patchFeedback
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: incidentId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: feedback
-          in: query
-          required: true
-          schema:
-            type: string
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: incidentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: feedback
+        in: query
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: Successful Operation
@@ -261,7 +271,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -271,23 +283,23 @@ paths:
   /{municipalityId}/category/{id}:
     get:
       tags:
-        - Category resources
+      - Category resources
       summary: Fetch category by ID
       operationId: getCategoryById
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "200":
           description: Category returned
@@ -309,7 +321,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -318,23 +332,23 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       tags:
-        - Category resources
+      - Category resources
       summary: Delete a category by id
       operationId: deleteCategoryById
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "204":
           description: Category deleted
@@ -349,7 +363,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -358,23 +374,23 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       tags:
-        - Category resources
+      - Category resources
       summary: Update a category
       operationId: patchCategory
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
@@ -402,7 +418,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -412,22 +430,22 @@ paths:
   /{municipalityId}/incident/{id}:
     get:
       tags:
-        - Incident resources
+      - Incident resources
       summary: Get a incident by id
       operationId: fetchIncidentById
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: Successful Operation
@@ -449,7 +467,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -459,22 +479,22 @@ paths:
   /{municipalityId}/incident/internal/oep/{externalCaseId}/status:
     get:
       tags:
-        - Incident resources
+      - Incident resources
       summary: Get status for a OeP incident
       operationId: getStatusForOeP
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: externalCaseId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: externalCaseId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: Successful Operation
@@ -493,7 +513,9 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -503,24 +525,26 @@ paths:
   /{municipalityId}/incident/incident/statuses:
     get:
       tags:
-        - Incident resources
+      - Incident resources
       summary: Get a list of valid statuses
       operationId: getValidIncidentStatuses
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       responses:
         "400":
           description: Bad Request
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -543,24 +567,26 @@ paths:
   /{municipalityId}/category/valid:
     get:
       tags:
-        - Category resources
+      - Category resources
       summary: Get a list of valid categories
       operationId: getValidCategories
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       responses:
         "400":
           description: Bad Request
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -583,24 +609,26 @@ paths:
   /{municipalityId}/category/valid/oep:
     get:
       tags:
-        - Category resources
+      - Category resources
       summary: Get a list of valid categories in oep format
       operationId: getValidOepCategories
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       responses:
         "400":
           description: Bad Request
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Problem"
+                oneOf:
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server Error
           content:
@@ -623,7 +651,7 @@ paths:
   /api-docs:
     get:
       tags:
-        - API
+      - API
       summary: OpenAPI
       operationId: getApiDocs
       responses:
@@ -640,10 +668,10 @@ components:
   schemas:
     AttachmentRequest:
       required:
-        - category
-        - extension
-        - file
-        - mimeType
+      - category
+      - extension
+      - file
+      - mimeType
       type: object
       properties:
         category:
@@ -669,9 +697,9 @@ components:
       description: Attachments
     IncidentSaveRequest:
       required:
-        - category
-        - description
-        - personId
+      - category
+      - description
+      - personId
       type: object
       properties:
         personId:
@@ -727,9 +755,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
     StatusType:
       type: object
@@ -738,6 +766,173 @@ components:
           type: integer
           format: int32
         reasonPhrase:
+          type: string
+    ConstraintViolationProblem:
+      type: object
+      properties:
+        cause:
+          $ref: "#/components/schemas/ThrowableProblem"
+        stackTrace:
+          type: array
+          items:
+            type: object
+            properties:
+              classLoaderName:
+                type: string
+              moduleName:
+                type: string
+              moduleVersion:
+                type: string
+              methodName:
+                type: string
+              fileName:
+                type: string
+              lineNumber:
+                type: integer
+                format: int32
+              className:
+                type: string
+              nativeMethod:
+                type: boolean
+        type:
+          type: string
+          format: uri
+        status:
+          $ref: "#/components/schemas/StatusType"
+        violations:
+          type: array
+          items:
+            $ref: "#/components/schemas/Violation"
+        title:
+          type: string
+        message:
+          type: string
+        instance:
+          type: string
+          format: uri
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        detail:
+          type: string
+        suppressed:
+          type: array
+          items:
+            type: object
+            properties:
+              stackTrace:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    classLoaderName:
+                      type: string
+                    moduleName:
+                      type: string
+                    moduleVersion:
+                      type: string
+                    methodName:
+                      type: string
+                    fileName:
+                      type: string
+                    lineNumber:
+                      type: integer
+                      format: int32
+                    className:
+                      type: string
+                    nativeMethod:
+                      type: boolean
+              message:
+                type: string
+              localizedMessage:
+                type: string
+        localizedMessage:
+          type: string
+    ThrowableProblem:
+      type: object
+      properties:
+        cause:
+          $ref: "#/components/schemas/ThrowableProblem"
+        stackTrace:
+          type: array
+          items:
+            type: object
+            properties:
+              classLoaderName:
+                type: string
+              moduleName:
+                type: string
+              moduleVersion:
+                type: string
+              methodName:
+                type: string
+              fileName:
+                type: string
+              lineNumber:
+                type: integer
+                format: int32
+              className:
+                type: string
+              nativeMethod:
+                type: boolean
+        message:
+          type: string
+        instance:
+          type: string
+          format: uri
+        type:
+          type: string
+          format: uri
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        status:
+          $ref: "#/components/schemas/StatusType"
+        detail:
+          type: string
+        title:
+          type: string
+        suppressed:
+          type: array
+          items:
+            type: object
+            properties:
+              stackTrace:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    classLoaderName:
+                      type: string
+                    moduleName:
+                      type: string
+                    moduleVersion:
+                      type: string
+                    methodName:
+                      type: string
+                    fileName:
+                      type: string
+                    lineNumber:
+                      type: integer
+                      format: int32
+                    className:
+                      type: string
+                    nativeMethod:
+                      type: boolean
+              message:
+                type: string
+              localizedMessage:
+                type: string
+        localizedMessage:
+          type: string
+    Violation:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
           type: string
     IncidentSaveResponse:
       type: object
@@ -752,10 +947,10 @@ components:
           example: 58f96da8-6d76-4fa6-bb92-64f71fdc6aa5
     CategoryPost:
       required:
-        - forwardTo
-        - label
-        - subject
-        - title
+      - forwardTo
+      - label
+      - subject
+      - title
       type: object
       properties:
         title:
@@ -875,14 +1070,14 @@ components:
           description: Status of the incident
           example: INSKICKAT
           enum:
-            - INSKICKAT
-            - KLART
-            - KOMPLETTERAD
-            - SPARAT
-            - UNDER_BEHANDLING
-            - VANTAR_KOMPLETTERING
-            - ARKIVERAD
-            - ERROR
+          - INSKICKAT
+          - KLART
+          - KOMPLETTERAD
+          - SPARAT
+          - UNDER_BEHANDLING
+          - VANTAR_KOMPLETTERING
+          - ARKIVERAD
+          - ERROR
         category:
           $ref: "#/components/schemas/Category"
         attachments:
@@ -952,4 +1147,4 @@ components:
           type: string
           description: The category label
           example: VATTENMÄTARE
-  securitySchemes: { }
+  securitySchemes: {}
