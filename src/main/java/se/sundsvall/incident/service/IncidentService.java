@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zalando.problem.Problem;
 
+import generated.se.sundsvall.messaging.MessageResult;
+import generated.se.sundsvall.messaging.MessageStatus;
 import se.sundsvall.incident.api.model.IncidentOepResponse;
 import se.sundsvall.incident.api.model.IncidentResponse;
 import se.sundsvall.incident.api.model.IncidentSaveRequest;
@@ -28,9 +30,6 @@ import se.sundsvall.incident.integration.db.repository.IncidentRepository;
 import se.sundsvall.incident.integration.lifebuoy.LifeBuoyIntegration;
 import se.sundsvall.incident.integration.messaging.MessagingIntegration;
 import se.sundsvall.incident.service.mapper.Mapper;
-
-import generated.se.sundsvall.messaging.MessageResult;
-import generated.se.sundsvall.messaging.MessageStatus;
 
 @Service
 public class IncidentService {
@@ -50,6 +49,7 @@ public class IncidentService {
 		final MessagingIntegration messagingIntegration,
 		final IncidentRepository incidentRepository,
 		final CategoryRepository categoryRepository) {
+
 		this.lifeBuoyIntegration = lifeBuoyIntegration;
 		this.messagingIntegration = messagingIntegration;
 		this.incidentRepository = incidentRepository;
@@ -57,13 +57,13 @@ public class IncidentService {
 	}
 
 	public IncidentResponse fetchIncidentByMunicipalityIdAndIncidentId(final String municipalityId, final String incidentId) {
-		var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
+		final var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, incidentId)));
 		return toIncidentResponse(incident);
 	}
 
 	public IncidentOepResponse fetchOepIncidentStatus(final String municipalityId, final String externalCaseId) {
-		var incident = incidentRepository.findIncidentEntityByMunicipalityIdAndExternalCaseId(municipalityId, externalCaseId)
+		final var incident = incidentRepository.findIncidentEntityByMunicipalityIdAndExternalCaseId(municipalityId, externalCaseId)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, externalCaseId)));
 		return toIncidentOepResponse(incident);
 	}
@@ -71,7 +71,7 @@ public class IncidentService {
 	public List<IncidentResponse> fetchPaginatedIncidents(final String municipalityId,
 		final Optional<Integer> pageNumber,
 		final Optional<Integer> pageSize) {
-		var incidents = incidentRepository.findAllByMunicipalityId(municipalityId,
+		final var incidents = incidentRepository.findAllByMunicipalityId(municipalityId,
 			PageRequest.of(pageNumber.orElse(0), pageSize.orElse(100)));
 
 		return incidents.stream()
@@ -81,15 +81,15 @@ public class IncidentService {
 
 	@Transactional
 	public IncidentSaveResponse createIncident(final String municipalityId, final IncidentSaveRequest request) {
-		var category = categoryRepository.findByMunicipalityIdAndCategoryId(municipalityId, request.getCategory())
+		final var category = categoryRepository.findByMunicipalityIdAndCategoryId(municipalityId, request.getCategory())
 			.orElseThrow(() -> Problem.valueOf(BAD_REQUEST, ENTITY_NOT_FOUND.formatted(CATEGORY, request.getCategory())));
-		var attachments = Optional.ofNullable(request.getAttachments())
+		final var attachments = Optional.ofNullable(request.getAttachments())
 			.map(list -> list.stream()
 				.map(Mapper::toAttachmentEntity)
 				.toList())
 			.orElseGet(ArrayList::new);
 
-		var incident = toIncidentEntity(request, category, attachments, municipalityId);
+		final var incident = toIncidentEntity(request, category, attachments, municipalityId);
 
 		sendNotification(incident);
 
@@ -101,7 +101,7 @@ public class IncidentService {
 
 	@Transactional
 	public void updateIncidentStatus(final String municipalityId, final String incidentId, final Integer statusId) {
-		var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
+		final var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, incidentId)));
 		incident.setStatus(Status.forValue(statusId));
 		incidentRepository.save(incident);
@@ -109,7 +109,7 @@ public class IncidentService {
 
 	@Transactional
 	public void updateIncidentFeedback(final String municipalityId, final String incidentId, final String feedback) {
-		var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
+		final var incident = incidentRepository.findByMunicipalityIdAndIncidentId(municipalityId, incidentId)
 			.orElseThrow(() -> Problem.valueOf(NOT_FOUND, ENTITY_NOT_FOUND.formatted(INCIDENT, incidentId)));
 		incident.setFeedback(feedback);
 		incidentRepository.save(incident);
@@ -122,12 +122,11 @@ public class IncidentService {
 					incident.setExternalCaseId(lifeBuoyIntegration.sendLifeBuoy(incident));
 					incident.setStatus(Status.INSKICKAT);
 				}
-				case "VATTENMATARE", "BRADD_OVERVAKNINGS_LARM" ->
-					setIncidentStatus(incident, messagingIntegration.sendMSVAEmail(incident));
+				case "VATTENMATARE", "BRADD_OVERVAKNINGS_LARM" -> setIncidentStatus(incident, messagingIntegration.sendMSVAEmail(incident));
 				default -> setIncidentStatus(incident, messagingIntegration.sendEmail(incident));
 
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.warn("Unable to send email for new incident with incidentId: {}, Exception was: {}", incident.getIncidentId(), e.getMessage());
 			incident.setStatus(Status.ERROR);
 		}
@@ -138,7 +137,7 @@ public class IncidentService {
 		messageResult.ifPresentOrElse(
 			result -> {
 				final var deliveryStatus = result.getDeliveries().getFirst().getStatus();
-				if (deliveryStatus == MessageStatus.SENT || deliveryStatus == MessageStatus.PENDING) {
+				if ((deliveryStatus == MessageStatus.SENT) || (deliveryStatus == MessageStatus.PENDING)) {
 					incident.setStatus(Status.INSKICKAT);
 				} else {
 					incident.setStatus(Status.ERROR);
