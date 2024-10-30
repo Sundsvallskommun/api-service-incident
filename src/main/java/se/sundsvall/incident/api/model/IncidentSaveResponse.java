@@ -1,6 +1,5 @@
 package se.sundsvall.incident.api.model;
 
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

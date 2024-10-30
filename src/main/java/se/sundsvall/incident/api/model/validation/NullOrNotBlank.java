@@ -10,7 +10,9 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 @Documented
-@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.PARAMETER})
+@Target({
+	ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.PARAMETER
+})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = NullOrNotBlankValidator.class)
 public @interface NullOrNotBlank {

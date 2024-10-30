@@ -6,6 +6,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder(setterPrefix = "with")
 public class LifeBuoyRequestWrapper {
-    String apiKey;
-    String errandJsonString;
+	String apiKey;
+	String errandJsonString;
 }

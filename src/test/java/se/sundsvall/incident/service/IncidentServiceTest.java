@@ -201,7 +201,9 @@ class IncidentServiceTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"LIVBAT", "LIVBOJ"})
+	@ValueSource(strings = {
+		"LIVBAT", "LIVBOJ"
+	})
 	void sendNotification_Lifebuoy_Test() throws JsonProcessingException {
 		when(mockLifeBuoyIntegration.sendLifeBuoy(any())).thenReturn("nothing");
 		var entity = createIncidentEntity();
@@ -215,7 +217,9 @@ class IncidentServiceTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"VATTENMATARE", "BRADD_OVERVAKNINGS_LARM"})
+	@ValueSource(strings = {
+		"VATTENMATARE", "BRADD_OVERVAKNINGS_LARM"
+	})
 	void sendNotificationTest(final String categoryTitle) {
 		when(mockMessagingIntegration.sendMSVAEmail(any())).thenReturn(Optional.of(new MessageResult()));
 		var entity = createIncidentEntity();

@@ -6,13 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 
 abstract class AbstractValidationTest {
 
-    protected Validator validator;
+	protected Validator validator;
 
-    @BeforeEach
-    void setUp() {
+	@BeforeEach
+	void setUp() {
 
-        validator = Validation.buildDefaultValidatorFactory().getValidator();
+		validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-    }
+	}
 }
-

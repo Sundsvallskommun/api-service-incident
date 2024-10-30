@@ -1,6 +1,5 @@
 package se.sundsvall.incident.configuration;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
