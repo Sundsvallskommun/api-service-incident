@@ -83,8 +83,11 @@ public class IncidentEntity {
 	private CategoryEntity category;
 
 	@Builder.Default
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name = "incident_id", referencedColumnName = "id",
+	@OneToMany(cascade = {
+		CascadeType.PERSIST, CascadeType.MERGE
+	})
+	@JoinColumn(name = "incident_id",
+		referencedColumnName = "id",
 		foreignKey = @ForeignKey(name = "fk_incident_attachment_incident_id"))
 	private List<AttachmentEntity> attachments = new ArrayList<>();
 

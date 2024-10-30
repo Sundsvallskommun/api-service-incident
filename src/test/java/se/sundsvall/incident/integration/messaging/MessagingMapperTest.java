@@ -35,7 +35,9 @@ class MessagingMapperTest {
 	private MessagingMapper mockMessagingMapper;
 
 	@ParameterizedTest
-	@ValueSource(strings = {"Vattenmätare, Bräddövervakningslarm"})
+	@ValueSource(strings = {
+		"Vattenmätare, Bräddövervakningslarm"
+	})
 	void toMSVAEmailRequest(final String categoryLabel) {
 		var address = "someemail@host.se";
 		var name = "someEmailName";

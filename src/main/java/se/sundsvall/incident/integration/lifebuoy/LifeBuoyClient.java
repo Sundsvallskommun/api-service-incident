@@ -13,8 +13,7 @@ import se.sundsvall.incident.integration.lifebuoy.model.LifeBuoyRequestWrapper;
 @FeignClient(
 	name = REGISTRATION_ID,
 	url = "${integration.lifebuoy.url}",
-	configuration = LifeBuoyConfiguration.class
-)
+	configuration = LifeBuoyConfiguration.class)
 interface LifeBuoyClient {
 
 	@PostMapping(consumes = "application/x-www-form-urlencoded")

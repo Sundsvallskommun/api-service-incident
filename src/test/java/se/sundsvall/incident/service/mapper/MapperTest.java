@@ -51,7 +51,7 @@ class MapperTest {
 		var entity = toCategoryEntity(MUNICIPALITY_ID, null);
 		assertThat(entity).isNull();
 	}
-	
+
 	@Test
 	void toIncidentEntityWhenNullTest() {
 		var entity = toIncidentEntity(null, null, null, null);

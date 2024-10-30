@@ -20,7 +20,8 @@ import lombok.Setter;
 @Table(name = "category",
 	uniqueConstraints = {
 		@UniqueConstraint(name = "UK_category_title", columnNames = "title"),
-		@UniqueConstraint(name = "UK_category_label", columnNames = "label")},
+		@UniqueConstraint(name = "UK_category_label", columnNames = "label")
+	},
 	indexes = {
 		@Index(name = "idx_category_municipality_id", columnList = "municipality_id"),
 	})

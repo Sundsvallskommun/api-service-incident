@@ -9,15 +9,16 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 @Documented
-@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.PARAMETER})
+@Target({
+	ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.PARAMETER
+})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ValidCoordsValidator.class)
 public @interface ValidCoords {
 
+	String message() default "must be valid coordinates e.g 62.4097,17.24024";
 
-    String message() default "must be valid coordinates e.g 62.4097,17.24024";
+	Class<?>[] groups() default {};
 
-    Class<?>[] groups() default {};
-
-    Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {};
 }

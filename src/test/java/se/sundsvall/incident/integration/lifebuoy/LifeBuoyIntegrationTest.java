@@ -19,7 +19,6 @@ import se.sundsvall.incident.integration.lifebuoy.model.LifeBuoyRequestWrapper;
 @ExtendWith(MockitoExtension.class)
 class LifeBuoyIntegrationTest {
 
-
 	@Mock
 	private LifeBuoyClient mockClient;
 
