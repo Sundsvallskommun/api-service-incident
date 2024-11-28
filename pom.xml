@@ -10,7 +10,6 @@
 	<artifactId>api-service-incident</artifactId>
 	<version>3.0</version>
 	<properties>
-		<exposed.app.port>8080</exposed.app.port>
 		<failsafe.version>3.3.2</failsafe.version>
 		<generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
 	</properties>
