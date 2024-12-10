@@ -1,7 +1,6 @@
 package se.sundsvall.incident.integration.lifebuoy.model;
 
 import java.util.HashMap;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

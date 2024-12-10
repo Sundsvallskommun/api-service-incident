@@ -16,10 +16,10 @@ import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
 import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 import static se.sundsvall.incident.TestDataFactory.createIncidentSaveRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import generated.se.sundsvall.messaging.MessageResult;
 import java.util.List;
 import java.util.Optional;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,7 +31,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.zalando.problem.Problem;
-
 import se.sundsvall.incident.api.model.IncidentOepResponse;
 import se.sundsvall.incident.api.model.IncidentResponse;
 import se.sundsvall.incident.api.model.IncidentSaveResponse;
@@ -41,8 +40,6 @@ import se.sundsvall.incident.integration.db.repository.CategoryRepository;
 import se.sundsvall.incident.integration.db.repository.IncidentRepository;
 import se.sundsvall.incident.integration.lifebuoy.LifeBuoyIntegration;
 import se.sundsvall.incident.integration.messaging.MessagingIntegration;
-
-import generated.se.sundsvall.messaging.MessageResult;
 
 @ExtendWith(MockitoExtension.class)
 class IncidentServiceTest {

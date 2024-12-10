@@ -1,8 +1,7 @@
 package se.sundsvall.incident.integration.db.entity.enums;
 
-import java.util.Arrays;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Arrays;
 
 public enum Status {
 	INSKICKAT(1, "Inskickat"),

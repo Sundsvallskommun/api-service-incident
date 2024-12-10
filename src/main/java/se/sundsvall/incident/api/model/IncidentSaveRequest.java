@@ -2,22 +2,19 @@ package se.sundsvall.incident.api.model;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
-import java.util.List;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
-import se.sundsvall.dept44.common.validators.annotation.ValidMobileNumber;
-import se.sundsvall.incident.api.model.validation.ValidCoords;
-
-import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import se.sundsvall.dept44.common.validators.annotation.ValidMobileNumber;
+import se.sundsvall.incident.api.model.validation.ValidCoords;
 
 @Getter
 @Setter

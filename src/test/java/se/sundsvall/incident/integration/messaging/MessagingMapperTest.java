@@ -10,7 +10,6 @@ import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +18,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thymeleaf.spring6.SpringTemplateEngine;
-
 import se.sundsvall.incident.integration.messaging.configuration.MessagingProperties;
 
 @ExtendWith(MockitoExtension.class)

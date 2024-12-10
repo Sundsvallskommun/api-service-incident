@@ -11,10 +11,6 @@ import static org.assertj.core.api.BDDAssertions.within;
 import static org.hamcrest.CoreMatchers.allOf;
 import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 
-import java.lang.reflect.Field;
-import java.time.LocalDateTime;
-import java.util.Random;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,12 +18,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.util.Random;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import se.sundsvall.incident.integration.db.entity.enums.Status;
 
 class IncidentEntityTest {
