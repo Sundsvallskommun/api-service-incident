@@ -11,14 +11,12 @@ import static org.assertj.core.api.BDDAssertions.within;
 import static org.hamcrest.CoreMatchers.allOf;
 import static se.sundsvall.incident.TestDataFactory.createAttachmentEntity;
 
-import java.lang.reflect.Field;
-import java.time.LocalDateTime;
-import java.util.Random;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.util.Random;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeAll;

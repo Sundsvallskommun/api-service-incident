@@ -1,13 +1,11 @@
 package se.sundsvall.incident.integration.lifebuoy.configuration;
 
+import feign.Request;
+import feign.codec.ErrorDecoder;
 import java.util.concurrent.TimeUnit;
-
 import org.springframework.cloud.openfeign.FeignBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-
-import feign.Request;
-import feign.codec.ErrorDecoder;
 import se.sundsvall.dept44.configuration.feign.FeignConfiguration;
 import se.sundsvall.dept44.configuration.feign.FeignMultiCustomizer;
 import se.sundsvall.dept44.configuration.feign.decoder.ProblemErrorDecoder;

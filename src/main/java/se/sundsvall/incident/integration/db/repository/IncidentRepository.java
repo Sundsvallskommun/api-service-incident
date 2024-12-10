@@ -1,14 +1,11 @@
 package se.sundsvall.incident.integration.db.repository;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import se.sundsvall.incident.integration.db.entity.IncidentEntity;
-
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @CircuitBreaker(name = "incidentRepository")
 public interface IncidentRepository extends JpaRepository<IncidentEntity, String> {

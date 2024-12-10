@@ -6,10 +6,8 @@ import static se.sundsvall.incident.service.mapper.Mapper.toCategory;
 import static se.sundsvall.incident.service.mapper.Mapper.toCategoryEntity;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.zalando.problem.Problem;
-
 import se.sundsvall.incident.api.model.Category;
 import se.sundsvall.incident.api.model.CategoryPatch;
 import se.sundsvall.incident.api.model.CategoryPost;

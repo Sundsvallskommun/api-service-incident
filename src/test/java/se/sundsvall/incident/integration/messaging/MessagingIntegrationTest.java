@@ -9,14 +9,13 @@ import static se.sundsvall.incident.TestDataFactory.createEmailRequest;
 import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 import static se.sundsvall.incident.TestDataFactory.createMSVAEmailRequest;
 
+import generated.se.sundsvall.messaging.EmailRequest;
+import generated.se.sundsvall.messaging.MessageResult;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import generated.se.sundsvall.messaging.EmailRequest;
-import generated.se.sundsvall.messaging.MessageResult;
 
 @ExtendWith(MockitoExtension.class)
 class MessagingIntegrationTest {

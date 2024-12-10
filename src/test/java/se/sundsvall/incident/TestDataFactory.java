@@ -1,12 +1,14 @@
 package se.sundsvall.incident;
 
+import generated.se.sundsvall.messaging.EmailAttachment;
+import generated.se.sundsvall.messaging.EmailRequest;
+import generated.se.sundsvall.messaging.EmailSender;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
-
 import se.sundsvall.incident.api.model.Attachment;
 import se.sundsvall.incident.api.model.AttachmentRequest;
 import se.sundsvall.incident.api.model.Category;
@@ -22,10 +24,6 @@ import se.sundsvall.incident.integration.db.entity.AttachmentEntity;
 import se.sundsvall.incident.integration.db.entity.CategoryEntity;
 import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 import se.sundsvall.incident.integration.db.entity.enums.Status;
-
-import generated.se.sundsvall.messaging.EmailAttachment;
-import generated.se.sundsvall.messaging.EmailRequest;
-import generated.se.sundsvall.messaging.EmailSender;
 
 public final class TestDataFactory {
 

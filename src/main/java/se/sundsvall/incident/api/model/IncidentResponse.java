@@ -1,15 +1,13 @@
 package se.sundsvall.incident.api.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import se.sundsvall.incident.integration.db.entity.enums.Status;
-
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import se.sundsvall.incident.integration.db.entity.enums.Status;
 
 @Getter
 @Builder(setterPrefix = "with")

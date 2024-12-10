@@ -5,12 +5,10 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetter
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.allOf;
 
-import java.lang.reflect.Field;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
+import java.lang.reflect.Field;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;

@@ -17,14 +17,12 @@ import static se.sundsvall.incident.TestDataFactory.createValidCategoryResponse;
 import static se.sundsvall.incident.TestDataFactory.createValidOepCategoryResponse;
 
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-
 import se.sundsvall.incident.service.CategoryService;
 
 @ExtendWith(MockitoExtension.class)

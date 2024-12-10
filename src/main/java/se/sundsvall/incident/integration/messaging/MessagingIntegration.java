@@ -1,12 +1,9 @@
 package se.sundsvall.incident.integration.messaging;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
-import se.sundsvall.incident.integration.db.entity.IncidentEntity;
-
 import generated.se.sundsvall.messaging.MessageResult;
+import java.util.Optional;
+import org.springframework.stereotype.Component;
+import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 
 @Component
 public class MessagingIntegration {

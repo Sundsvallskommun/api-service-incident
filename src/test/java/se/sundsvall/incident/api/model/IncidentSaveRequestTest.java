@@ -5,7 +5,6 @@ import static se.sundsvall.incident.TestDataFactory.PERSON_ID;
 import static se.sundsvall.incident.TestDataFactory.createIncidentSaveRequest;
 
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 class IncidentSaveRequestTest {

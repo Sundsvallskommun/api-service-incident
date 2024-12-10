@@ -4,7 +4,6 @@ import static java.util.UUID.randomUUID;
 
 import java.util.List;
 import java.util.Optional;
-
 import se.sundsvall.incident.api.model.Attachment;
 import se.sundsvall.incident.api.model.AttachmentRequest;
 import se.sundsvall.incident.api.model.Category;

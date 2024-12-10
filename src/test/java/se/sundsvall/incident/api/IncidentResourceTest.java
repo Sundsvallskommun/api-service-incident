@@ -16,14 +16,12 @@ import static se.sundsvall.incident.TestDataFactory.createIncidentSaveResponse;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-
 import se.sundsvall.incident.integration.db.entity.enums.Status;
 import se.sundsvall.incident.service.IncidentService;
 

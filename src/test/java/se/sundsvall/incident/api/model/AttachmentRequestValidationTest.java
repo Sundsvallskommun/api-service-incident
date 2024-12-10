@@ -4,9 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.incident.TestDataFactory.createAttachmentRequest;
 
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
-
 import se.sundsvall.incident.TestDataFactory;
 
 class AttachmentRequestValidationTest extends AbstractValidationTest {

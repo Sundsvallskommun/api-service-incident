@@ -2,7 +2,6 @@ package se.sundsvall.incident.integration.lifebuoy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Component;
-
 import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 
 @Component

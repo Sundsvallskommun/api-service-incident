@@ -1,13 +1,15 @@
 {
 	"phoneNumber": "0701234567",
 	"externalCaseId": "1234",
-	"attachments": [{
-		"note": "a small note about this file",
-		"extension": ".txt",
-		"file": "aGVsbG8gd29ybGQK",
-		"mimeType": "text/plain",
-		"category": "Adress"
-	}],
+	"attachments": [
+		{
+			"note": "a small note about this file",
+			"extension": ".txt",
+			"file": "aGVsbG8gd29ybGQK",
+			"mimeType": "text/plain",
+			"category": "Adress"
+		}
+	],
 	"mapCoordinates": "62.23162,17.27403",
 	"description": "A description",
 	"personId": "58f96da8-6d76-4fa6-bb92-64f71fdc6aa5",

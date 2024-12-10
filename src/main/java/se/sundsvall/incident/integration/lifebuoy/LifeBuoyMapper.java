@@ -1,13 +1,10 @@
 package se.sundsvall.incident.integration.lifebuoy;
 
-import java.util.Arrays;
-
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import java.util.Arrays;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.stereotype.Component;
 import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 import se.sundsvall.incident.integration.lifebuoy.configuration.LifeBuoyProperties;
 import se.sundsvall.incident.integration.lifebuoy.model.LifeBuoyRequestWrapper;

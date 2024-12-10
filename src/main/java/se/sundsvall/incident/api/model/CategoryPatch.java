@@ -1,10 +1,8 @@
 package se.sundsvall.incident.api.model;
 
-import jakarta.validation.constraints.Email;
-
-import se.sundsvall.incident.api.model.validation.NullOrNotBlank;
-
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
+import se.sundsvall.incident.api.model.validation.NullOrNotBlank;
 
 public record CategoryPatch(
 

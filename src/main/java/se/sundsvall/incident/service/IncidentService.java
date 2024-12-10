@@ -6,19 +6,17 @@ import static se.sundsvall.incident.service.mapper.Mapper.toIncidentEntity;
 import static se.sundsvall.incident.service.mapper.Mapper.toIncidentOepResponse;
 import static se.sundsvall.incident.service.mapper.Mapper.toIncidentResponse;
 
+import generated.se.sundsvall.messaging.MessageResult;
+import generated.se.sundsvall.messaging.MessageStatus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zalando.problem.Problem;
-
-import generated.se.sundsvall.messaging.MessageResult;
-import generated.se.sundsvall.messaging.MessageStatus;
 import se.sundsvall.incident.api.model.IncidentOepResponse;
 import se.sundsvall.incident.api.model.IncidentResponse;
 import se.sundsvall.incident.api.model.IncidentSaveRequest;
