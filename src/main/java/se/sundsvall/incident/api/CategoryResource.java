@@ -64,9 +64,7 @@ class CategoryResource {
 		responses = {
 			@ApiResponse(responseCode = "200", description = "All categories returned", useReturnTypeSchema = true),
 		})
-	@GetMapping(produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	})
+	@GetMapping(produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Category>> getAllCategories(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 
@@ -80,9 +78,7 @@ class CategoryResource {
 				description = "Not found",
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
-	@GetMapping(path = "/{id}", produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	})
+	@GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Category> getCategoryById(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("id") final Integer id) {
@@ -94,7 +90,7 @@ class CategoryResource {
 		responses = {
 			@ApiResponse(responseCode = "201", description = "Category created", useReturnTypeSchema = true),
 		})
-	@PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_PROBLEM_JSON_VALUE)
+	@PostMapping(consumes = APPLICATION_JSON_VALUE, produces = ALL_VALUE)
 	public ResponseEntity<Void> postCategory(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@RequestBody @Valid final CategoryPost categoryPost) {
@@ -112,9 +108,7 @@ class CategoryResource {
 				description = "Not found",
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
-	@PatchMapping(path = "/{id}", produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	}, consumes = APPLICATION_JSON_VALUE)
+	@PatchMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Category> patchCategory(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("id") final Integer id,
@@ -130,7 +124,7 @@ class CategoryResource {
 				description = "Not found",
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
-	@DeleteMapping(path = "/{id}", produces = APPLICATION_PROBLEM_JSON_VALUE)
+	@DeleteMapping(path = "/{id}", produces = ALL_VALUE)
 	public ResponseEntity<Void> deleteCategoryById(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("id") final Integer id) {
@@ -145,9 +139,7 @@ class CategoryResource {
 		responses = {
 			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 		})
-	@GetMapping(path = "/valid", produces = {
-		APPLICATION_PROBLEM_JSON_VALUE, APPLICATION_JSON_VALUE
-	})
+	@GetMapping(path = "/valid", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ValidCategoryResponse>> getValidCategories(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 
@@ -158,9 +150,7 @@ class CategoryResource {
 		responses = {
 			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 		})
-	@GetMapping(path = "/valid/oep", produces = {
-		APPLICATION_PROBLEM_JSON_VALUE, APPLICATION_JSON_VALUE
-	})
+	@GetMapping(path = "/valid/oep", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ValidOepCategoryResponse>> getValidOepCategories(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 

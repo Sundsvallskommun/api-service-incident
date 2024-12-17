@@ -61,9 +61,7 @@ class IncidentResource {
 	@Operation(summary = "Get list of incidents", responses = {
 		@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 	})
-	@GetMapping(produces = {
-		APPLICATION_PROBLEM_JSON_VALUE, APPLICATION_JSON_VALUE
-	})
+	@GetMapping(produces = APPLICATION_JSON_VALUE)
 	ResponseEntity<List<IncidentResponse>> fetchAllIncidents(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@RequestParam(required = false) final Optional<Integer> pageNumber,
@@ -79,9 +77,7 @@ class IncidentResource {
 				description = "Not Found",
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
-	@GetMapping(path = "/{id}", produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	})
+	@GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
 	ResponseEntity<IncidentResponse> fetchIncidentById(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("id") final String id) {
@@ -108,9 +104,7 @@ class IncidentResource {
 		@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 
 	})
-	@GetMapping(value = "/incident/statuses", produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	})
+	@GetMapping(value = "/incident/statuses", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ValidStatusResponse>> getValidIncidentStatuses(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 		return ok(Arrays.stream(Status.values())
@@ -123,9 +117,7 @@ class IncidentResource {
 	@Operation(summary = "Create a incident and send notification", responses = {
 		@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 	})
-	@PostMapping(produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
-	}, consumes = APPLICATION_JSON_VALUE)
+	@PostMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
 	ResponseEntity<IncidentSaveResponse> createIncident(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@RequestBody @Valid final IncidentSaveRequest incidentSaveRequest) {
@@ -140,7 +132,7 @@ class IncidentResource {
 				description = "Not Found",
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
-	@PatchMapping(path = "/status/{incidentId}", produces = APPLICATION_PROBLEM_JSON_VALUE)
+	@PatchMapping(path = "/status/{incidentId}", produces = APPLICATION_JSON_VALUE)
 	ResponseEntity<Void> patchStatus(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("incidentId") final String incidentId,
@@ -157,7 +149,7 @@ class IncidentResource {
 				description = "Not Found",
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
-	@PatchMapping(path = "/feedback/{incidentId}", produces = APPLICATION_PROBLEM_JSON_VALUE)
+	@PatchMapping(path = "/feedback/{incidentId}", produces = APPLICATION_JSON_VALUE)
 	ResponseEntity<Void> patchFeedback(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("incidentId") final String incidentId,
