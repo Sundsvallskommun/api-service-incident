@@ -58,8 +58,9 @@ class IncidentResource {
 		this.incidentService = incidentService;
 	}
 
-	@Operation(summary = "Get list of incidents")
-	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	@Operation(summary = "Get list of incidents", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	})
 	@GetMapping(produces = {
 		APPLICATION_PROBLEM_JSON_VALUE, APPLICATION_JSON_VALUE
 	})
@@ -103,8 +104,10 @@ class IncidentResource {
 		return ok(incidentService.fetchOepIncidentStatus(municipalityId, externalCaseId));
 	}
 
-	@Operation(summary = "Get a list of valid statuses")
-	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	@Operation(summary = "Get a list of valid statuses", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+
+	})
 	@GetMapping(value = "/incident/statuses", produces = {
 		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
 	})
@@ -117,8 +120,9 @@ class IncidentResource {
 			.toList());
 	}
 
-	@Operation(summary = "Create a incident and send notification")
-	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	@Operation(summary = "Create a incident and send notification", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	})
 	@PostMapping(produces = {
 		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
 	}, consumes = APPLICATION_JSON_VALUE)

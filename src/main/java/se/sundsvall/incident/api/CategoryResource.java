@@ -141,8 +141,10 @@ class CategoryResource {
 			.build();
 	}
 
-	@Operation(summary = "Get a list of valid categories")
-	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	@Operation(summary = "Get a list of valid categories",
+		responses = {
+			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+		})
 	@GetMapping(path = "/valid", produces = {
 		APPLICATION_PROBLEM_JSON_VALUE, APPLICATION_JSON_VALUE
 	})
@@ -152,8 +154,10 @@ class CategoryResource {
 		return ok(categoryService.fetchValidCategories(municipalityId));
 	}
 
-	@Operation(summary = "Get a list of valid categories in oep format")
-	@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+	@Operation(summary = "Get a list of valid categories in oep format",
+		responses = {
+			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
+		})
 	@GetMapping(path = "/valid/oep", produces = {
 		APPLICATION_PROBLEM_JSON_VALUE, APPLICATION_JSON_VALUE
 	})
