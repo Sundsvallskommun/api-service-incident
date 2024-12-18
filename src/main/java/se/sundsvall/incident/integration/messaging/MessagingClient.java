@@ -5,6 +5,7 @@ import static se.sundsvall.incident.integration.messaging.configuration.Messagin
 
 import generated.se.sundsvall.messaging.EmailRequest;
 import generated.se.sundsvall.messaging.MessageResult;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import se.sundsvall.incident.integration.messaging.configuration.MessagingConfig
 	name = REGISTRATION_ID,
 	url = "${integration.messaging.url}",
 	configuration = MessagingConfiguration.class)
+@CircuitBreaker(name = REGISTRATION_ID)
 public interface MessagingClient {
 
 	/**
