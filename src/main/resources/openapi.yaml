@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-  - url: http://localhost:61727
+  - url: http://localhost:54942
     description: Generated server url
 paths:
   /{municipalityId}/incident:
@@ -45,12 +45,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/IncidentResponse"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -59,6 +53,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       tags:
         - Incident resources
@@ -85,12 +85,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/IncidentSaveResponse"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -99,6 +93,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/category:
     get:
       tags:
@@ -122,12 +122,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Category"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -136,6 +130,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       tags:
         - Category resources
@@ -158,12 +158,6 @@ paths:
       responses:
         "201":
           description: Category created
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -172,6 +166,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/incident/status/{incidentId}:
     patch:
       tags:
@@ -206,12 +206,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -220,6 +214,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/incident/feedback/{incidentId}:
     patch:
       tags:
@@ -253,12 +253,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -267,6 +261,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/category/{id}:
     get:
       tags:
@@ -300,12 +300,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -314,6 +308,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       tags:
         - Category resources
@@ -342,12 +342,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -356,6 +350,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       tags:
         - Category resources
@@ -394,12 +394,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -408,6 +402,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/incident/{id}:
     get:
       tags:
@@ -440,12 +440,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -454,6 +448,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/incident/internal/oep/{externalCaseId}/status:
     get:
       tags:
@@ -486,12 +486,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -500,6 +494,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/incident/incident/statuses:
     get:
       tags:
@@ -523,12 +523,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ValidStatusResponse"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -537,6 +531,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/category/valid:
     get:
       tags:
@@ -560,12 +560,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ValidCategoryResponse"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -574,6 +568,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/category/valid/oep:
     get:
       tags:
@@ -597,12 +597,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ValidOepCategoryResponse"
-        "500":
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad Request
           content:
@@ -611,6 +605,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /api-docs:
     get:
       tags:
@@ -638,14 +638,17 @@ components:
       type: object
       properties:
         category:
+          minLength: 1
           type: string
           description: The attachment category type
           example: Adress
         extension:
+          minLength: 1
           type: string
           description: The attachment extension type
           example: .txt
         mimeType:
+          minLength: 1
           type: string
           description: The attachment content type
           example: text/plain
@@ -654,6 +657,7 @@ components:
           description: The attachment note
           example: a small note about this file
         file:
+          minLength: 1
           type: string
           description: The attachment (file) content as a BASE64-encoded string
           example: aGVsbG8gd29ybGQK
@@ -687,6 +691,7 @@ components:
           format: int32
           example: 15
         description:
+          minLength: 1
           type: string
           description: Description of the incident
           example: A description
@@ -725,11 +730,11 @@ components:
     StatusType:
       type: object
       properties:
-        reasonPhrase:
-          type: string
         statusCode:
           type: integer
           format: int32
+        reasonPhrase:
+          type: string
     ConstraintViolationProblem:
       type: object
       properties:
@@ -917,18 +922,22 @@ components:
       type: object
       properties:
         title:
+          minLength: 1
           type: string
           description: Category name
           example: GANGCYKELVAG
         label:
+          minLength: 1
           type: string
           description: Description of the category
           example: Gång- och cykelväg
         forwardTo:
+          minLength: 1
           type: string
           description: The E-mail where the incidents are forwarded to
           example: nowhere@nowhere.com
         subject:
+          minLength: 1
           type: string
           description: The subject of the email
           example: Nytt larm
