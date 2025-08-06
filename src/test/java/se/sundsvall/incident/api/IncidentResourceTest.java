@@ -35,7 +35,7 @@ class IncidentResourceTest {
 	private IncidentResource incidentResource;
 
 	@Test
-	void fetchAllIncidents_200_WhenFoundTest() {
+	void fetchAllIncidents200WhenFoundTest() {
 		when(mockIncidentService.fetchPaginatedIncidents(eq(MUNICIPALITY_ID), any(), any())).thenReturn(List.of(createIncidentResponse()));
 
 		var response = incidentResource.fetchAllIncidents(MUNICIPALITY_ID, Optional.of(0), Optional.of(10));
@@ -47,7 +47,7 @@ class IncidentResourceTest {
 	}
 
 	@Test
-	void fetchAllIncidents_200_WhenEmptyTest() {
+	void fetchAllIncidents200WhenEmptyTest() {
 		when(mockIncidentService.fetchPaginatedIncidents(eq(MUNICIPALITY_ID), any(), any())).thenReturn(List.of());
 
 		var response = incidentResource.fetchAllIncidents(MUNICIPALITY_ID, Optional.of(0), Optional.of(10));
@@ -59,7 +59,7 @@ class IncidentResourceTest {
 	}
 
 	@Test
-	void fetchIncidentById_200_Test() {
+	void fetchIncidentById200Test() {
 		var incidentResponse = createIncidentResponse();
 		when(mockIncidentService.fetchIncidentByMunicipalityIdAndIncidentId(eq(MUNICIPALITY_ID), any(String.class))).thenReturn(incidentResponse);
 

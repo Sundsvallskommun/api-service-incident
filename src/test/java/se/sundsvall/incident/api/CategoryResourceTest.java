@@ -35,7 +35,7 @@ class CategoryResourceTest {
 	private CategoryResource categoryResource;
 
 	@Test
-	void getAllCategoriesTest_shouldReturn200() {
+	void getAllCategoriesTestShouldReturn200() {
 		when(mockCategoryService.fetchCategories(MUNICIPALITY_ID)).thenReturn(List.of(createCategoryDTO()));
 
 		var response = categoryResource.getAllCategories(MUNICIPALITY_ID);
@@ -44,7 +44,7 @@ class CategoryResourceTest {
 	}
 
 	@Test
-	void getCategoryByIdTest_shouldReturn200_whenFound() {
+	void getCategoryByIdTestShouldReturn200WhenFound() {
 		when(mockCategoryService.fetchCategoryByMunicipalityAndId(eq(MUNICIPALITY_ID), any(Integer.class))).thenReturn(createCategoryDTO());
 
 		var response = categoryResource.getCategoryById(MUNICIPALITY_ID, 5);
@@ -54,7 +54,7 @@ class CategoryResourceTest {
 	}
 
 	@Test
-	void postCategoryTest_shouldReturn201_whenCreated() {
+	void postCategoryTestShouldReturn201WhenCreated() {
 		when(mockCategoryService.createCategory(eq(MUNICIPALITY_ID), any())).thenReturn(createCategoryDTO());
 
 		var response = categoryResource.postCategory(MUNICIPALITY_ID, createCategoryPost());
@@ -63,7 +63,7 @@ class CategoryResourceTest {
 	}
 
 	@Test
-	void patchCategoryTest_shouldReturn200_whenOk() {
+	void patchCategoryTestShouldReturn200WhenOk() {
 		when(mockCategoryService.patchCategory(eq(MUNICIPALITY_ID), any(), any())).thenReturn(createCategoryDTO());
 
 		var response = categoryResource.patchCategory(MUNICIPALITY_ID, 5, createCategoryPatch());
@@ -72,7 +72,7 @@ class CategoryResourceTest {
 	}
 
 	@Test
-	void deleteCategoryByIdTest_shouldReturn204_whenDeleted() {
+	void deleteCategoryByIdTestShouldReturn204WhenDeleted() {
 		var response = categoryResource.deleteCategoryById(MUNICIPALITY_ID, 5);
 
 		assertThat(response.getStatusCode()).isEqualTo(NO_CONTENT);
@@ -103,5 +103,4 @@ class CategoryResourceTest {
 		verify(mockCategoryService).fetchValidOepCategories(MUNICIPALITY_ID);
 		verifyNoMoreInteractions(mockCategoryService);
 	}
-
 }

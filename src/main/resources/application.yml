@@ -9,13 +9,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: ${config.jpa.ddl-auto}
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDBDialect
     defer-datasource-initialization: ${config.jpa.defer-datasource-initialization}
   flyway:
     enabled: ${config.flyway.enabled}
-    baseline-on-migrate: true
   security:
     oauth2:
       client:

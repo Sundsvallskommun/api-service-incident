@@ -105,7 +105,7 @@ class IncidentResource {
 
 	})
 	@GetMapping(value = "/incident/statuses", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ValidStatusResponse>> getValidIncidentStatuses(
+	ResponseEntity<List<ValidStatusResponse>> getValidIncidentStatuses(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 		return ok(Arrays.stream(Status.values())
 			.map(dto -> ValidStatusResponse.builder()

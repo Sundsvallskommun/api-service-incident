@@ -71,7 +71,7 @@ class IncidentServiceTest {
 	}
 
 	@Test
-	void fetchIncidentByMunicipalityIdAndIncidentId_NotFoundTest() {
+	void fetchIncidentByMunicipalityIdAndIncidentIdNotFoundTest() {
 		when(mockIncidentRepository.findByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID)).thenReturn(Optional.empty());
 
 		assertThatThrownBy(() -> incidentService.fetchIncidentByMunicipalityIdAndIncidentId(MUNICIPALITY_ID, INCIDENT_ID))
@@ -94,7 +94,7 @@ class IncidentServiceTest {
 	}
 
 	@Test
-	void fetchOepIncidentStatus_NotFoundTest() {
+	void fetchOepIncidentStatusNotFoundTest() {
 		when(mockIncidentRepository.findIncidentEntityByMunicipalityIdAndExternalCaseId(MUNICIPALITY_ID, INCIDENT_ID)).thenReturn(Optional.empty());
 
 		assertThatThrownBy(() -> incidentService.fetchOepIncidentStatus(MUNICIPALITY_ID, INCIDENT_ID))
@@ -201,7 +201,7 @@ class IncidentServiceTest {
 	@ValueSource(strings = {
 		"LIVBAT", "LIVBOJ"
 	})
-	void sendNotification_Lifebuoy_Test() throws JsonProcessingException {
+	void sendNotificationLifebuoyTest() throws JsonProcessingException {
 		when(mockLifeBuoyIntegration.sendLifeBuoy(any())).thenReturn("nothing");
 		var entity = createIncidentEntity();
 		var category = createCategoryEntity();
@@ -230,7 +230,7 @@ class IncidentServiceTest {
 	}
 
 	@Test
-	void sendNotification_WhenThrows_Test() throws JsonProcessingException {
+	void sendNotificationWhenThrowsTest() throws JsonProcessingException {
 		var entity = createIncidentEntity();
 		var category = createCategoryEntity();
 		category.setTitle("LIVBOJ");
@@ -242,5 +242,4 @@ class IncidentServiceTest {
 		assertThat(entity.getStatus()).isEqualTo(Status.ERROR);
 		verify(mockLifeBuoyIntegration).sendLifeBuoy(any());
 	}
-
 }
