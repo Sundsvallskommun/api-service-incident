@@ -65,7 +65,7 @@ class CategoryResource {
 			@ApiResponse(responseCode = "200", description = "All categories returned", useReturnTypeSchema = true),
 		})
 	@GetMapping(produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Category>> getAllCategories(
+	ResponseEntity<List<Category>> getAllCategories(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 
 		return ok(categoryService.fetchCategories(municipalityId));
@@ -79,7 +79,7 @@ class CategoryResource {
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
 	@GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Category> getCategoryById(
+	ResponseEntity<Category> getCategoryById(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("id") final Integer id) {
 
@@ -91,7 +91,7 @@ class CategoryResource {
 			@ApiResponse(responseCode = "201", description = "Category created", useReturnTypeSchema = true),
 		})
 	@PostMapping(consumes = APPLICATION_JSON_VALUE, produces = ALL_VALUE)
-	public ResponseEntity<Void> postCategory(
+	ResponseEntity<Void> postCategory(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@RequestBody @Valid final CategoryPost categoryPost) {
 
@@ -109,7 +109,7 @@ class CategoryResource {
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
 	@PatchMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Category> patchCategory(
+	ResponseEntity<Category> patchCategory(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("id") final Integer id,
 		@RequestBody @Valid final CategoryPatch patch) {
@@ -125,7 +125,7 @@ class CategoryResource {
 				content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 		})
 	@DeleteMapping(path = "/{id}", produces = ALL_VALUE)
-	public ResponseEntity<Void> deleteCategoryById(
+	ResponseEntity<Void> deleteCategoryById(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId,
 		@PathVariable("id") final Integer id) {
 
@@ -140,7 +140,7 @@ class CategoryResource {
 			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 		})
 	@GetMapping(path = "/valid", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ValidCategoryResponse>> getValidCategories(
+	ResponseEntity<List<ValidCategoryResponse>> getValidCategories(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 
 		return ok(categoryService.fetchValidCategories(municipalityId));
@@ -151,7 +151,7 @@ class CategoryResource {
 			@ApiResponse(responseCode = "200", description = "Successful Operation", useReturnTypeSchema = true)
 		})
 	@GetMapping(path = "/valid/oep", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ValidOepCategoryResponse>> getValidOepCategories(
+	ResponseEntity<List<ValidOepCategoryResponse>> getValidOepCategories(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @PathVariable("municipalityId") @ValidMunicipalityId final String municipalityId) {
 
 		return ok(categoryService.fetchValidOepCategories(municipalityId));

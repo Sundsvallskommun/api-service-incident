@@ -31,6 +31,8 @@ public final class TestDataFactory {
 	public static final String INCIDENT_ID = "ef60e3e-d245-4d79-b350-fbabc022b249";
 	public static final String PERSON_ID = "58f96da8-6d76-4fa6-bb92-64f71fdc6aa5";
 
+	private TestDataFactory() {}
+
 	public static IncidentEntity createIncidentEntity() {
 		return IncidentEntity.builder()
 			.withIncidentId(INCIDENT_ID)
