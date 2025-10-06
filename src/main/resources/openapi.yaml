@@ -676,7 +676,7 @@ components:
         phoneNumber:
           type: string
           description: Mobile number. Should start with 07x
-          example: "0701234578"
+          example: "0701740605"
         email:
           type: string
           description: Reporters e-mail address
@@ -1024,7 +1024,7 @@ components:
         phoneNumber:
           type: string
           description: The phone number
-          example: "0701234578"
+          example: "0701740605"
         email:
           type: string
           description: Reporters e-mail address
