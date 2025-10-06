@@ -26,7 +26,7 @@ public class IncidentSaveRequest {
 	@Schema(description = "A uuid string representing a person", example = "58f96da8-6d76-4fa6-bb92-64f71fdc6aa5", requiredMode = REQUIRED)
 	private String personId;
 
-	@Schema(description = "Mobile number. Should start with 07x", example = "0701234578")
+	@Schema(description = "Mobile number. Should start with 07x", example = "0701740605")
 	@ValidMobileNumber(nullable = true)
 	private String phoneNumber;
 

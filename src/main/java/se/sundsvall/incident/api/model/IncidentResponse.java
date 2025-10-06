@@ -23,7 +23,7 @@ public class IncidentResponse {
 	@Schema(description = "The ID of the person", example = "58f96da8-6d76-4fa6-bb92-64f71fdc6aa5")
 	private String personId;
 
-	@Schema(description = "The phone number", example = "0701234578")
+	@Schema(description = "The phone number", example = "0701740605")
 	private String phoneNumber;
 
 	@Schema(description = "Reporters e-mail address", example = "someemail@somehost.se")
