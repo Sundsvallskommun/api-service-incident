@@ -14,7 +14,7 @@ class IncidentSaveRequestTest {
 		final var request = createIncidentSaveRequest();
 
 		assertThat(request.getPersonId()).isEqualTo(PERSON_ID);
-		assertThat(request.getPhoneNumber()).isEqualTo("0701234567");
+		assertThat(request.getPhoneNumber()).isEqualTo("0701740605");
 		assertThat(request.getEmail()).isEqualTo("mail@mail.se");
 		assertThat(request.getContactMethod()).isEqualTo("email");
 		assertThat(request.getCategory()).isEqualTo(3);
