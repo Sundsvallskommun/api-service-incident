@@ -12,19 +12,19 @@ import lombok.Getter;
 @Schema(description = "Category model")
 public class Category {
 
-	@Schema(description = "The category id", example = "15")
+	@Schema(description = "The category id", examples = "15")
 	private Integer categoryId;
 
-	@Schema(description = "Category name", example = "GANGCYKELVAG")
+	@Schema(description = "Category name", examples = "GANGCYKELVAG")
 	private String title;
 
-	@Schema(description = "Description of the category", example = "Gång- och cykelväg")
+	@Schema(description = "Description of the category", examples = "Gång- och cykelväg")
 	private String label;
 
-	@Schema(description = "The E-mail where the incidents are forwarded to", example = "nowhere@nowhere.com")
+	@Schema(description = "The E-mail where the incidents are forwarded to", examples = "nowhere@nowhere.com")
 	private String forwardTo;
 
-	@Schema(description = "The E-mail subject", example = "Nytt Larm")
+	@Schema(description = "The E-mail subject", examples = "Nytt Larm")
 	private String subject;
 
 }

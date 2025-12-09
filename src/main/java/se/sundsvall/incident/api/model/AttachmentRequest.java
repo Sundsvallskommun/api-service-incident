@@ -19,21 +19,21 @@ import lombok.Setter;
 public class AttachmentRequest {
 
 	@NotBlank
-	@Schema(description = "The attachment category type", example = "Adress", requiredMode = REQUIRED)
+	@Schema(description = "The attachment category type", examples = "Adress", requiredMode = REQUIRED)
 	private String category;
 
 	@NotBlank
-	@Schema(description = "The attachment extension type", example = ".txt", requiredMode = REQUIRED)
+	@Schema(description = "The attachment extension type", examples = ".txt", requiredMode = REQUIRED)
 	private String extension;
 
 	@NotBlank
-	@Schema(description = "The attachment content type", example = "text/plain", requiredMode = REQUIRED)
+	@Schema(description = "The attachment content type", examples = "text/plain", requiredMode = REQUIRED)
 	private String mimeType;
 
-	@Schema(description = "The attachment note", example = "a small note about this file")
+	@Schema(description = "The attachment note", examples = "a small note about this file")
 	private String note;
 
 	@NotBlank
-	@Schema(description = "The attachment (file) content as a BASE64-encoded string", example = "aGVsbG8gd29ybGQK", requiredMode = REQUIRED)
+	@Schema(description = "The attachment (file) content as a BASE64-encoded string", examples = "aGVsbG8gd29ybGQK", requiredMode = REQUIRED)
 	private String file;
 }

@@ -11,10 +11,10 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class ValidStatusResponse {
 
-	@Schema(description = "The ID of the status", example = "5")
+	@Schema(description = "The ID of the status", examples = "5")
 	private Integer statusId;
 
-	@Schema(description = "The status name", example = "INSKICKAT")
+	@Schema(description = "The status name", examples = "INSKICKAT")
 	private String status;
 
 }

@@ -11,10 +11,10 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class ValidCategoryResponse {
 
-	@Schema(description = "The name of the category", example = "VATTENMÄTARE")
+	@Schema(description = "The name of the category", examples = "VATTENMÄTARE")
 	private String category;
 
-	@Schema(description = "The ID of the category", example = "15")
+	@Schema(description = "The ID of the category", examples = "15")
 	private Integer categoryId;
 
 }
