@@ -11,16 +11,16 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class IncidentOepResponse {
 
-	@Schema(description = "The incident ID", example = "58f96da8-6d76-4fa6-bb92-64f71fdc6aa5")
+	@Schema(description = "The incident ID", examples = "58f96da8-6d76-4fa6-bb92-64f71fdc6aa5")
 	private String incidentId;
 
-	@Schema(description = "The external case ID", example = "12345")
+	@Schema(description = "The external case ID", examples = "12345")
 	private String externalCaseId;
 
-	@Schema(description = "Status of the incident", example = "KLART")
+	@Schema(description = "Status of the incident", examples = "KLART")
 	private Integer statusId;
 
-	@Schema(description = "Status text", example = "Klart")
+	@Schema(description = "Status text", examples = "Klart")
 	private String statusText;
 
 }

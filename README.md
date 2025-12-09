@@ -2,13 +2,14 @@
 
 _This service handles error reports by receiving, processing, and forwarding them._
 
-_It integrates with ISYCase for SBK-related error reports. For other types of error reports, it forwards them via email to customer service._
+_It integrates with ISYCase for SBK-related error reports. For other types of error reports, it forwards them via email
+to customer service._
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Java 21 or higher**
+- **Java 25 or higher**
 - **Maven**
 - **MariaDB**
 - **Git**
@@ -30,7 +31,8 @@ _It integrates with ISYCase for SBK-related error reports. For other types of er
 
 3. **Ensure dependent services are running:**
 
-   If this microservice depends on other services, make sure they are up and accessible. See [Dependencies](#dependencies) for more details.
+   If this microservice depends on other services, make sure they are up and accessible.
+   See [Dependencies](#dependencies) for more details.
 
 4. **Build and run the application:**
 
@@ -48,7 +50,8 @@ This microservice depends on the following services:
   - **Setup Instructions:** Refer to its documentation for installation and configuration steps.
 - **ISYCase**
   - **Purpose:** Case management system that handles SBK-related cases.
-  - **Website:** [https://norconsultdigital.se/driftade-tjaenster/isy-road/](https://norconsultdigital.se/driftade-tjaenster/isy-road/)
+  - **Website:
+    ** [https://norconsultdigital.se/driftade-tjaenster/isy-road/](https://norconsultdigital.se/driftade-tjaenster/isy-road/)
   - **Setup Instructions:** Refer to its documentation for installation and configuration steps.
 
 Ensure that these services are running and properly configured before starting this microservice.
@@ -75,7 +78,8 @@ curl -X GET http://localhost:8080/api/2281/incident/1
 
 ## Configuration
 
-Configuration is crucial for the application to run successfully. Ensure all necessary settings are configured in `application.yml`.
+Configuration is crucial for the application to run successfully. Ensure all necessary settings are configured in
+`application.yml`.
 
 ### Key Configuration Parameters
 
@@ -115,7 +119,8 @@ Configuration is crucial for the application to run successfully. Ensure all nec
 
 ### Database Initialization
 
-The project is set up with [Flyway](https://github.com/flyway/flyway) for database migrations. Flyway is disabled by default so you will have to enable it to automatically populate the database schema upon application startup.
+The project is set up with [Flyway](https://github.com/flyway/flyway) for database migrations. Flyway is disabled by
+default so you will have to enable it to automatically populate the database schema upon application startup.
 
 ```yaml
 spring:
@@ -123,7 +128,8 @@ spring:
     enabled: true
 ```
 
-- **No additional setup is required** for database initialization, as long as the database connection settings are correctly configured.
+- **No additional setup is required** for database initialization, as long as the database connection settings are
+  correctly configured.
 
 ### Additional Notes
 
@@ -137,7 +143,8 @@ spring:
 
 ## Contributing
 
-Contributions are welcome! Please see [CONTRIBUTING.md](https://github.com/Sundsvallskommun/.github/blob/main/.github/CONTRIBUTING.md) for guidelines.
+Contributions are welcome! Please
+see [CONTRIBUTING.md](https://github.com/Sundsvallskommun/.github/blob/main/.github/CONTRIBUTING.md) for guidelines.
 
 ## License
 
