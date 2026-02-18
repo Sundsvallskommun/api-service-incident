@@ -1,10 +1,5 @@
 package se.sundsvall.incident.integration.messaging;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.time.LocalDateTime.now;
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-import static java.util.Base64.getEncoder;
-
 import generated.se.sundsvall.messaging.EmailAttachment;
 import generated.se.sundsvall.messaging.EmailRequest;
 import generated.se.sundsvall.messaging.EmailSender;
@@ -18,6 +13,11 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import se.sundsvall.incident.integration.db.entity.AttachmentEntity;
 import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 import se.sundsvall.incident.integration.messaging.configuration.MessagingProperties;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.time.LocalDateTime.now;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+import static java.util.Base64.getEncoder;
 
 @Component
 @EnableConfigurationProperties(MessagingProperties.class)

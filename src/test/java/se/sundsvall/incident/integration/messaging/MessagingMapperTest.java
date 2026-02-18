@@ -1,13 +1,5 @@
 package se.sundsvall.incident.integration.messaging;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static se.sundsvall.incident.TestDataFactory.createAttachmentEntity;
-import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
-import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import org.junit.jupiter.api.Test;
@@ -19,6 +11,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import se.sundsvall.incident.integration.messaging.configuration.MessagingProperties;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static se.sundsvall.incident.TestDataFactory.createAttachmentEntity;
+import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
+import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 
 @ExtendWith(MockitoExtension.class)
 class MessagingMapperTest {

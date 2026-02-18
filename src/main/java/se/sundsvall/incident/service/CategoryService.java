@@ -1,10 +1,5 @@
 package se.sundsvall.incident.service;
 
-import static java.util.Optional.ofNullable;
-import static org.zalando.problem.Status.NOT_FOUND;
-import static se.sundsvall.incident.service.mapper.Mapper.toCategory;
-import static se.sundsvall.incident.service.mapper.Mapper.toCategoryEntity;
-
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.zalando.problem.Problem;
@@ -16,6 +11,11 @@ import se.sundsvall.incident.api.model.ValidOepCategoryResponse;
 import se.sundsvall.incident.integration.db.entity.CategoryEntity;
 import se.sundsvall.incident.integration.db.repository.CategoryRepository;
 import se.sundsvall.incident.service.mapper.Mapper;
+
+import static java.util.Optional.ofNullable;
+import static org.zalando.problem.Status.NOT_FOUND;
+import static se.sundsvall.incident.service.mapper.Mapper.toCategory;
+import static se.sundsvall.incident.service.mapper.Mapper.toCategoryEntity;
 
 @Service
 public class CategoryService {

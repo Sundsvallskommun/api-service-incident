@@ -1,9 +1,9 @@
 package se.sundsvall.incident.api.model.validation;
 
-import static java.util.Objects.isNull;
-
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+
+import static java.util.Objects.isNull;
 
 public class NullOrNotBlankValidator implements ConstraintValidator<NullOrNotBlank, String> {
 

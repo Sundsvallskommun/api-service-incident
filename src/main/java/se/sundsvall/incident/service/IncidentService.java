@@ -1,11 +1,5 @@
 package se.sundsvall.incident.service;
 
-import static org.zalando.problem.Status.BAD_REQUEST;
-import static org.zalando.problem.Status.NOT_FOUND;
-import static se.sundsvall.incident.service.mapper.Mapper.toIncidentEntity;
-import static se.sundsvall.incident.service.mapper.Mapper.toIncidentOepResponse;
-import static se.sundsvall.incident.service.mapper.Mapper.toIncidentResponse;
-
 import generated.se.sundsvall.messaging.MessageResult;
 import generated.se.sundsvall.messaging.MessageStatus;
 import java.util.ArrayList;
@@ -28,6 +22,12 @@ import se.sundsvall.incident.integration.db.repository.IncidentRepository;
 import se.sundsvall.incident.integration.lifebuoy.LifeBuoyIntegration;
 import se.sundsvall.incident.integration.messaging.MessagingIntegration;
 import se.sundsvall.incident.service.mapper.Mapper;
+
+import static org.zalando.problem.Status.BAD_REQUEST;
+import static org.zalando.problem.Status.NOT_FOUND;
+import static se.sundsvall.incident.service.mapper.Mapper.toIncidentEntity;
+import static se.sundsvall.incident.service.mapper.Mapper.toIncidentOepResponse;
+import static se.sundsvall.incident.service.mapper.Mapper.toIncidentResponse;
 
 @Service
 public class IncidentService {

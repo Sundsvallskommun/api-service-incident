@@ -1,21 +1,5 @@
 package se.sundsvall.incident.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-import static org.zalando.problem.Status.BAD_REQUEST;
-import static se.sundsvall.incident.TestDataFactory.INCIDENT_ID;
-import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
-import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
-import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
-import static se.sundsvall.incident.TestDataFactory.createIncidentSaveRequest;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import generated.se.sundsvall.messaging.MessageResult;
 import java.util.List;
@@ -40,6 +24,22 @@ import se.sundsvall.incident.integration.db.repository.CategoryRepository;
 import se.sundsvall.incident.integration.db.repository.IncidentRepository;
 import se.sundsvall.incident.integration.lifebuoy.LifeBuoyIntegration;
 import se.sundsvall.incident.integration.messaging.MessagingIntegration;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static org.zalando.problem.Status.BAD_REQUEST;
+import static se.sundsvall.incident.TestDataFactory.INCIDENT_ID;
+import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
+import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
+import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
+import static se.sundsvall.incident.TestDataFactory.createIncidentSaveRequest;
 
 @ExtendWith(MockitoExtension.class)
 class IncidentServiceTest {

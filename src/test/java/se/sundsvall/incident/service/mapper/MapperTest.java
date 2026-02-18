@@ -1,5 +1,7 @@
 package se.sundsvall.incident.service.mapper;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
 import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
@@ -11,8 +13,6 @@ import static se.sundsvall.incident.service.mapper.Mapper.toCategoryEntity;
 import static se.sundsvall.incident.service.mapper.Mapper.toIncidentEntity;
 import static se.sundsvall.incident.service.mapper.Mapper.toIncidentOepResponse;
 import static se.sundsvall.incident.service.mapper.Mapper.toIncidentResponse;
-
-import org.junit.jupiter.api.Test;
 
 class MapperTest {
 

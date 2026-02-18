@@ -1,7 +1,5 @@
 package se.sundsvall.incident.api.model;
 
-import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +13,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import se.sundsvall.dept44.common.validators.annotation.ValidMobileNumber;
 import se.sundsvall.incident.api.model.validation.ValidCoords;
+
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Getter
 @Setter

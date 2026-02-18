@@ -1,7 +1,5 @@
 package se.sundsvall.incident.service.mapper;
 
-import static java.util.UUID.randomUUID;
-
 import java.util.List;
 import java.util.Optional;
 import se.sundsvall.incident.api.model.Attachment;
@@ -15,6 +13,8 @@ import se.sundsvall.incident.integration.db.entity.AttachmentEntity;
 import se.sundsvall.incident.integration.db.entity.CategoryEntity;
 import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 import se.sundsvall.incident.integration.db.entity.enums.Status;
+
+import static java.util.UUID.randomUUID;
 
 public final class Mapper {
 
