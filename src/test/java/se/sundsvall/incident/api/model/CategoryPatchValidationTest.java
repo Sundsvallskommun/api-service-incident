@@ -1,7 +1,5 @@
 package se.sundsvall.incident.api.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import java.util.List;
@@ -9,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Answers;
 import org.mockito.Mock;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CategoryPatchValidationTest {
 

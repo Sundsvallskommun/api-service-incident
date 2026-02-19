@@ -1,17 +1,5 @@
 package se.sundsvall.incident.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
-import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
-import static se.sundsvall.incident.TestDataFactory.createCategoryPatch;
-import static se.sundsvall.incident.TestDataFactory.createCategoryPost;
-
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -24,6 +12,18 @@ import se.sundsvall.incident.api.model.Category;
 import se.sundsvall.incident.api.model.ValidCategoryResponse;
 import se.sundsvall.incident.api.model.ValidOepCategoryResponse;
 import se.sundsvall.incident.integration.db.repository.CategoryRepository;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
+import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
+import static se.sundsvall.incident.TestDataFactory.createCategoryPatch;
+import static se.sundsvall.incident.TestDataFactory.createCategoryPost;
 
 @ExtendWith(MockitoExtension.class)
 class CategoryServiceTest {

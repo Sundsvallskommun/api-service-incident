@@ -1,16 +1,5 @@
 package se.sundsvall.incident.integration.db.entity;
 
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
-import static com.google.code.beanmatchers.BeanMatchers.registerValueGenerator;
-import static java.time.LocalDateTime.now;
-import static java.time.ZoneId.systemDefault;
-import static java.time.temporal.ChronoUnit.SECONDS;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.BDDAssertions.within;
-import static org.hamcrest.CoreMatchers.allOf;
-import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -26,6 +15,17 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import se.sundsvall.incident.integration.db.entity.enums.Status;
+
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static com.google.code.beanmatchers.BeanMatchers.registerValueGenerator;
+import static java.time.LocalDateTime.now;
+import static java.time.ZoneId.systemDefault;
+import static java.time.temporal.ChronoUnit.SECONDS;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.BDDAssertions.within;
+import static org.hamcrest.CoreMatchers.allOf;
+import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 
 class IncidentEntityTest {
 

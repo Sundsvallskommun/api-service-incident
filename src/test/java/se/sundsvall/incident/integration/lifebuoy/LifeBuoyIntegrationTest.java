@@ -1,10 +1,5 @@
 package se.sundsvall.incident.integration.lifebuoy;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +9,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import se.sundsvall.incident.integration.lifebuoy.model.LifeBuoyRequestWrapper;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 
 @ExtendWith(MockitoExtension.class)
 class LifeBuoyIntegrationTest {

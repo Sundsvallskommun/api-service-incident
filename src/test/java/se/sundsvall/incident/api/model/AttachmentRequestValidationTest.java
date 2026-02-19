@@ -1,11 +1,11 @@
 package se.sundsvall.incident.api.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static se.sundsvall.incident.TestDataFactory.createAttachmentRequest;
-
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import se.sundsvall.incident.TestDataFactory;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static se.sundsvall.incident.TestDataFactory.createAttachmentRequest;
 
 class AttachmentRequestValidationTest extends AbstractValidationTest {
 

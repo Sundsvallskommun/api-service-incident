@@ -1,5 +1,13 @@
 package se.sundsvall.incident.integration.messaging;
 
+import generated.se.sundsvall.messaging.EmailRequest;
+import generated.se.sundsvall.messaging.MessageResult;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -8,14 +16,6 @@ import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
 import static se.sundsvall.incident.TestDataFactory.createEmailRequest;
 import static se.sundsvall.incident.TestDataFactory.createIncidentEntity;
 import static se.sundsvall.incident.TestDataFactory.createMSVAEmailRequest;
-
-import generated.se.sundsvall.messaging.EmailRequest;
-import generated.se.sundsvall.messaging.MessageResult;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class MessagingIntegrationTest {

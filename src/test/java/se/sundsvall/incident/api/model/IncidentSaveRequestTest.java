@@ -1,11 +1,11 @@
 package se.sundsvall.incident.api.model;
 
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.incident.TestDataFactory.PERSON_ID;
 import static se.sundsvall.incident.TestDataFactory.createIncidentSaveRequest;
-
-import java.util.List;
-import org.junit.jupiter.api.Test;
 
 class IncidentSaveRequestTest {
 

@@ -1,9 +1,5 @@
 package se.sundsvall.incident.api;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.ok;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,6 +31,10 @@ import se.sundsvall.incident.api.model.IncidentSaveResponse;
 import se.sundsvall.incident.api.model.ValidStatusResponse;
 import se.sundsvall.incident.integration.db.entity.enums.Status;
 import se.sundsvall.incident.service.IncidentService;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @Validated
