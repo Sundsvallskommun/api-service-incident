@@ -1,7 +1,5 @@
 package se.sundsvall.incident.integration.lifebuoy;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -9,6 +7,7 @@ import se.sundsvall.incident.integration.db.entity.IncidentEntity;
 import se.sundsvall.incident.integration.lifebuoy.configuration.LifeBuoyProperties;
 import se.sundsvall.incident.integration.lifebuoy.model.LifeBuoyRequestWrapper;
 import se.sundsvall.incident.integration.lifebuoy.model.LifebuoyRequest;
+import tools.jackson.databind.ObjectMapper;
 
 @Component
 @EnableConfigurationProperties(LifeBuoyProperties.class)
@@ -22,7 +21,7 @@ class LifeBuoyMapper {
 		this.properties = lifeBuoyProperties;
 	}
 
-	LifeBuoyRequestWrapper toLifeBuoyRequest(IncidentEntity incident) throws JsonProcessingException {
+	LifeBuoyRequestWrapper toLifeBuoyRequest(IncidentEntity incident) {
 		return LifeBuoyRequestWrapper.builder()
 			.withApiKey(properties.apiKey())
 			.withErrandJsonString(objectMapper.writeValueAsString(LifebuoyRequest.builder()

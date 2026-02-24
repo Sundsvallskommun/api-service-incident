@@ -1,6 +1,5 @@
 package se.sundsvall.incident.integration.lifebuoy;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +27,7 @@ class LifeBuoyIntegrationTest {
 	private LifeBuoyIntegration lifeBuoyIntegration;
 
 	@Test
-	void sendLifeBuoyTest() throws JsonProcessingException {
+	void sendLifeBuoyTest() {
 		var incident = createIncidentEntity();
 		var wrapper = LifeBuoyRequestWrapper.builder().build();
 		when(mockMapper.toLifeBuoyRequest(any())).thenReturn(wrapper);
