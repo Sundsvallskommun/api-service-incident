@@ -1,6 +1,5 @@
 package se.sundsvall.incident.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import generated.se.sundsvall.messaging.MessageResult;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.zalando.problem.Problem;
+import se.sundsvall.dept44.problem.Problem;
 import se.sundsvall.incident.api.model.IncidentOepResponse;
 import se.sundsvall.incident.api.model.IncidentResponse;
 import se.sundsvall.incident.api.model.IncidentSaveResponse;
@@ -34,7 +33,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
-import static org.zalando.problem.Status.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static se.sundsvall.incident.TestDataFactory.INCIDENT_ID;
 import static se.sundsvall.incident.TestDataFactory.MUNICIPALITY_ID;
 import static se.sundsvall.incident.TestDataFactory.createCategoryEntity;
@@ -201,7 +200,7 @@ class IncidentServiceTest {
 	@ValueSource(strings = {
 		"LIVBAT", "LIVBOJ"
 	})
-	void sendNotificationLifebuoyTest() throws JsonProcessingException {
+	void sendNotificationLifebuoyTest() {
 		when(mockLifeBuoyIntegration.sendLifeBuoy(any())).thenReturn("nothing");
 		var entity = createIncidentEntity();
 		var category = createCategoryEntity();
@@ -230,7 +229,7 @@ class IncidentServiceTest {
 	}
 
 	@Test
-	void sendNotificationWhenThrowsTest() throws JsonProcessingException {
+	void sendNotificationWhenThrowsTest() {
 		var entity = createIncidentEntity();
 		var category = createCategoryEntity();
 		category.setTitle("LIVBOJ");
