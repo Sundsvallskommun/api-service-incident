@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-- url: http://localhost:52919
+- url: http://localhost:53167
   description: Generated server url
 paths:
   /{municipalityId}/incident:
@@ -637,16 +637,19 @@ components:
           description: The attachment category type
           examples:
           - Adress
+          minLength: 1
         extension:
           type: string
           description: The attachment extension type
           examples:
           - .txt
+          minLength: 1
         mimeType:
           type: string
           description: The attachment content type
           examples:
           - text/plain
+          minLength: 1
         note:
           type: string
           description: The attachment note
@@ -657,6 +660,7 @@ components:
           description: The attachment (file) content as a BASE64-encoded string
           examples:
           - aGVsbG8gd29ybGQK
+          minLength: 1
       required:
       - category
       - extension
@@ -697,6 +701,7 @@ components:
           description: Description of the incident
           examples:
           - A description
+          minLength: 1
         mapCoordinates:
           type: string
           description: The map coordinates for the incident
@@ -747,10 +752,10 @@ components:
             $ref: "#/components/schemas/Violation"
         title:
           type: string
-        causeAsProblem:
-          $ref: "#/components/schemas/ThrowableProblem"
         detail:
           type: string
+        causeAsProblem:
+          $ref: "#/components/schemas/ThrowableProblem"
         instance:
           type: string
           format: uri
@@ -799,22 +804,26 @@ components:
           description: Category name
           examples:
           - GANGCYKELVAG
+          minLength: 1
         label:
           type: string
           description: Description of the category
           examples:
           - Gång- och cykelväg
+          minLength: 1
         forwardTo:
           type: string
           format: email
           description: The E-mail where the incidents are forwarded to
           examples:
           - nowhere@nowhere.com
+          minLength: 1
         subject:
           type: string
           description: The subject of the email
           examples:
           - Nytt larm
+          minLength: 1
       required:
       - forwardTo
       - label
