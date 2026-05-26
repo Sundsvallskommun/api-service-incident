@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-- url: http://localhost:53167
+- url: http://localhost:62721
   description: Generated server url
 paths:
   /{municipalityId}/incident:
@@ -695,7 +695,7 @@ components:
           format: int32
           description: 'The category id for the incident '
           examples:
-          - "15"
+          - 15
         description:
           type: string
           description: Description of the incident
@@ -851,7 +851,7 @@ components:
           format: int32
           description: The category id
           examples:
-          - "15"
+          - 15
         title:
           type: string
           description: Category name
@@ -1009,7 +1009,7 @@ components:
           format: int32
           description: The ID of the status
           examples:
-          - "5"
+          - 5
         status:
           type: string
           description: The status name
@@ -1028,7 +1028,7 @@ components:
           format: int32
           description: The ID of the category
           examples:
-          - "15"
+          - 15
     ValidOepCategoryResponse:
       type: object
       properties:
