@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,7 +53,7 @@ public class AttachmentEntity {
 
 	@PrePersist
 	void prePersist() {
-		this.created = LocalDateTime.now();
+		this.created = LocalDateTime.now(ZoneId.systemDefault());
 	}
 
 }

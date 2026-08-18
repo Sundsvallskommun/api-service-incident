@@ -17,6 +17,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
@@ -96,14 +97,14 @@ public class IncidentEntity {
 
 	@PrePersist
 	void prePersist() {
-		var now = LocalDateTime.now();
+		var now = LocalDateTime.now(ZoneId.systemDefault());
 		this.updated = now;
 		this.created = now;
 	}
 
 	@PreUpdate
 	void preUpdate() {
-		this.updated = LocalDateTime.now();
+		this.updated = LocalDateTime.now(ZoneId.systemDefault());
 	}
 
 }
