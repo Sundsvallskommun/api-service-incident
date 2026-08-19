@@ -4,6 +4,7 @@ import generated.se.sundsvall.messaging.EmailAttachment;
 import generated.se.sundsvall.messaging.EmailRequest;
 import generated.se.sundsvall.messaging.EmailSender;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -34,7 +35,7 @@ class MessagingMapper {
 
 	EmailRequest toMSVAEmailRequest(final IncidentEntity incident) {
 		final String[] splitDescription = incident.getDescription().split("-");
-		final var htmlmessage = "<p>" + incident.getCategory().getLabel() + " " + splitDescription[0] + " genererat larm" + splitDescription[1] + " klockan " + now().format(ISO_LOCAL_DATE_TIME) + "</p>";
+		final var htmlmessage = "<p>" + incident.getCategory().getLabel() + " " + splitDescription[0] + " genererat larm" + splitDescription[1] + " klockan " + now(ZoneId.systemDefault()).format(ISO_LOCAL_DATE_TIME) + "</p>";
 		return new EmailRequest(incident.getCategory().getForwardTo(), incident.getCategory().getSubject() + " " + incident.getDescription())
 			.sender(new EmailSender().address(properties.sender().address()).name(properties.sender().name()).replyTo(properties.sender().replyTo()))
 			.htmlMessage(getEncoder().encodeToString(htmlmessage.getBytes(UTF_8)));
@@ -57,7 +58,7 @@ class MessagingMapper {
 		templateModel.put("email", incident.getEmail());
 		templateModel.put("coords", incident.getCoordinates());
 		templateModel.put("emailDescription", incident.getDescription());
-		templateModel.put("currentTime", OffsetDateTime.now().format(ISO_LOCAL_DATE_TIME));
+		templateModel.put("currentTime", OffsetDateTime.now(ZoneId.systemDefault()).format(ISO_LOCAL_DATE_TIME));
 		templateModel.put("feedbackmail", properties.sender().replyTo());
 		final Context thymeleafContext = new Context();
 		thymeleafContext.setVariables(templateModel);
