@@ -1,11 +1,11 @@
 package apptest;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 
 public final class CommonStubs {
 
