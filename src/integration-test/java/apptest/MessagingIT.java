@@ -1,16 +1,15 @@
 package apptest;
 
-import static apptest.CommonStubs.stubForAccessToken;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpStatus.OK;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
-
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 import se.sundsvall.incident.Application;
+
+import static apptest.CommonStubs.stubForAccessToken;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(
 	files = "classpath:/MessagingIT/",
